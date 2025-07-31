@@ -58,7 +58,7 @@ const Banner = () => {
   }
 
   return (
-    <div className="relative h-64 sm:h-80 md:h-96 overflow-hidden">
+    <div className="relative h-64 sm:h-80 md:h-[70vh] overflow-hidden">
       <Swiper
         modules={[Navigation, Pagination, Autoplay]}
         spaceBetween={0}

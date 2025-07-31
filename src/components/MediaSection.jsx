@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { client, getImageUrl } from '../lib/sanity';
+import MediaS1 from "../assets/MediaSection/MediaS1.jpg"
 
 const MediaSection = () => {
   const [mediaContent, setMediaContent] = useState([]);
@@ -16,7 +17,7 @@ const MediaSection = () => {
           video,
           description
         }`;
-        
+
         const content = await client.fetch(query);
         setMediaContent(content);
       } catch (error) {
@@ -68,11 +69,17 @@ const MediaSection = () => {
               </div>
               <div className={`relative ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
                 {media.type === 'image' ? (
-                  <img
-                    src={media.image ? getImageUrl(media.image) : 'https://images.pexels.com/photos/1910472/pexels-photo-1910472.jpeg?auto=compress&cs=tinysrgb&w=800'}
-                    alt={media.title}
-                    className="w-full h-64 sm:h-80 object-cover rounded-lg shadow-lg"
-                  />
+
+                  <div className="overflow-hidden rounded-lg shadow-lg group">
+                    <img
+                      // src={media.image?.asset ? getImageUrl(media.image) : MediaS1}
+                      src={MediaS1}
+                      alt={media.title}
+                      className="w-full h-64 sm:h-80 object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  </div>
+
+
                 ) : (
                   <div className="w-full h-64 sm:h-80 bg-gray-300 rounded-lg shadow-lg flex items-center justify-center">
                     <span className="text-gray-600">Video Content</span>

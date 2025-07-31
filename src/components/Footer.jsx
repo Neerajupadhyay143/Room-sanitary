@@ -1,120 +1,97 @@
 import React from 'react';
+import { Facebook, Instagram, Twitter, Linkedin, Youtube, MessageCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Mail } from 'lucide-react';
-import FacebookIcon from '@mui/icons-material/Facebook';
-import InstagramIcon from '@mui/icons-material/Instagram';
-import LinkedInIcon from '@mui/icons-material/LinkedIn';
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-          {/* Company Info */}
-          <div className="col-span-1 sm:col-span-2 lg:col-span-1">
-            <div className="flex items-center space-x-2 mb-4">
-              <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-lg">BE</span>
-              </div>
-              <span className="text-lg sm:text-xl font-bold">Bathroom Essentials</span>
-            </div>
-            <p className="text-gray-400 mb-6 text-sm sm:text-base">
-              Transforming bathrooms with premium quality fixtures and accessories since 1995.
-            </p>
-            <div className="flex space-x-4">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" 
-                 className="text-gray-400 hover:text-blue-400 transition-colors">
-                <FacebookIcon />
-              </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
-                 className="text-gray-400 hover:text-pink-400 transition-colors">
-                <InstagramIcon />
-              </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
-                 className="text-gray-400 hover:text-blue-400 transition-colors">
-                <LinkedInIcon />
-              </a>
-            </div>
-          </div>
+    <footer className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white shadow-[0_-4px_10px_rgba(0,0,0,0.15)]">
+      <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
 
-          {/* Contact Information */}
-          <div className="col-span-1">
-            <h3 className="text-base sm:text-lg font-semibold mb-4">Contact Information</h3>
-            <div className="space-y-3">
-              <div className="flex items-start space-x-3">
-                <MapPin className="h-5 w-5 text-blue-400 mt-0.5 flex-shrink-0" />
-                <span className="text-gray-400 text-sm sm:text-base">
-                  123 Bathroom Avenue<br />
-                  New York, NY 10001
-                </span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Phone className="h-5 w-5 text-blue-400 flex-shrink-0" />
-                <span className="text-gray-400 text-sm sm:text-base">1-800-BATHROOM</span>
-              </div>
-              <div className="flex items-center space-x-3">
-                <Mail className="h-5 w-5 text-blue-400 flex-shrink-0" />
-                <span className="text-gray-400 text-sm sm:text-base">info@bathroomessentials.com</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Quick Links */}
-          <div className="col-span-1">
-            <h3 className="text-base sm:text-lg font-semibold mb-4">Quick Links</h3>
-            <ul className="space-y-2">
-              <li>
-                <Link to="/terms" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
-                  Terms & Conditions
-                </Link>
-              </li>
-              <li>
-                <Link to="/privacy" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
-                  Privacy Policy
-                </Link>
-              </li>
-              <li>
-                <Link to="/promotions" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
-                  Promotions
-                </Link>
-              </li>
-              <li>
-                <Link to="/sitemap" className="text-gray-400 hover:text-white transition-colors text-sm sm:text-base">
-                  Site Map
-                </Link>
-              </li>
-            </ul>
-          </div>
-
-          {/* Newsletter */}
-          <div className="col-span-1 sm:col-span-2 lg:col-span-1">
-            <h3 className="text-base sm:text-lg font-semibold mb-4">Stay Updated</h3>
-            <p className="text-gray-400 mb-4 text-sm sm:text-base">
-              Subscribe to our newsletter for the latest products and promotions.
-            </p>
-            <form className="space-y-3">
-              <input
-                type="email"
-                placeholder="Enter your email"
-                className="w-full px-4 py-2 bg-gray-800 border border-gray-700 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-white placeholder-gray-400 text-sm sm:text-base"
-              />
+        {/* Instagram Feed */}
+        <div>
+          <h3 className="font-semibold mb-4 text-white">Visit Our Instagram Feed</h3>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            {[1, 2, 3, 4].map((_, index) => (
               <button
-                type="submit"
-                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded-lg transition-colors text-sm sm:text-base"
+                key={index}
+                className="w-full aspect-square flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-lg shadow transition"
               >
-                Subscribe
+                <svg
+                  fill="currentColor"
+                  viewBox="0 0 24 24"
+                  className="w-6 h-6 text-white"
+                >
+                  <path d="M10 17l6-5-6-5v10z" />
+                </svg>
               </button>
-            </form>
+            ))}
           </div>
         </div>
 
-        <div className="border-t border-gray-800 mt-8 pt-8 text-center">
-          <p className="text-gray-400 text-sm sm:text-base">
-            &copy; 2025 Bathroom Essentials. All rights reserved.
-          </p>
+        <div>
+          <h3 className="font-semibold mb-4 text-white">Social Links</h3>
+          <ul className="space-y-3 text-sm text-gray-300">
+            <li className="flex items-center space-x-2">
+              <Facebook className="h-4 w-4" />
+              <span>Facebook</span>
+            </li>
+            <li className="flex items-center space-x-2">
+              <Instagram className="h-4 w-4" />
+              <span>Instagram</span>
+            </li>
+            <li className="flex items-center space-x-2">
+              <Twitter className="h-4 w-4" />
+              <span>Twitter</span>
+            </li>
+            <li className="flex items-center space-x-2">
+              <Linkedin className="h-4 w-4" />
+              <span>LinkedIn</span>
+            </li>
+            <li className="flex items-center space-x-2">
+              <Youtube className="h-4 w-4" />
+              <span>YouTube</span>
+            </li>
+            <li className="flex items-center space-x-2">
+              <MessageCircle className="h-4 w-4" />
+              <span>Whatsapp</span>
+            </li>
+          </ul>
+        </div>
+
+        {/* Company Links */}
+        <div>
+          <h3 className="font-semibold mb-4 text-white">Company</h3>
+          <ul className="space-y-3 text-sm text-gray-300">
+            <li><Link to="/about">About us</Link></li>
+            <li><Link to="/exports">Exports</Link></li>
+            <li><Link to="/certifications">Certifications</Link></li>
+            <li><Link to="/media">Media</Link></li>
+            <li><Link to="/careers">Careers</Link></li>
+            <li><Link to="/wwr">Who we are</Link></li>
+          </ul>
+        </div>
+
+        {/* Useful Links */}
+        <div>
+          <h3 className="font-semibold mb-4 text-white">Useful Links</h3>
+          <ul className="space-y-3 text-sm text-gray-300">
+            <li><Link to="/blogs">Blog</Link></li>
+            <li><Link to="/privacyp">Privacy Policy</Link></li>
+            <li><Link to="/t&c">Terms & Conditions</Link></li>
+          </ul>
+        </div>
+
+        {/* Talk To Us */}
+        <div>
+          <h3 className="font-semibold mb-4 text-white">Talk To Us</h3>
+          <ul className="space-y-3 text-sm text-gray-300">
+            <li><Link to="/feedback">Feedback</Link></li>
+            <li><Link to="/contact">Contact Us</Link></li>
+          </ul>
         </div>
       </div>
     </footer>
+
   );
 };
 
