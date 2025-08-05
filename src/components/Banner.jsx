@@ -3,6 +3,7 @@ import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Pagination, Autoplay } from 'swiper/modules';
 import { client, getImageUrl } from '../lib/sanity';
 import { motion } from 'framer-motion';
+import { Skeleton, Box } from '@mui/material';
 
 import Banner1 from "../assets/Banner/Banner1.jpg";
 import Banner2 from "../assets/Banner/Banner2.jpg";
@@ -38,7 +39,7 @@ const Banner = () => {
         setBannerImages(images);
       } catch (error) {
         console.error('Error fetching banner images:', error);
-        setBannerImages([]); // ensure fallback kicks in
+        setBannerImages([]); // fallback
       } finally {
         setLoading(false);
       }
@@ -51,9 +52,12 @@ const Banner = () => {
 
   if (loading) {
     return (
-      <div className="h-64 sm:h-80 md:h-96 bg-gradient-to-r from-blue-600 to-blue-800 flex items-center justify-center">
-        <div className="text-white text-xl">Loading...</div>
-      </div>
+      <Box className="h-64 sm:h-80 md:h-[70vh] w-full overflow-hidden relative">
+        <Skeleton variant="rectangular" width="100%" height="100%" />
+        <Box className="absolute inset-0 flex items-center justify-center">
+          <Skeleton variant="text" width={200} height={40} />
+        </Box>
+      </Box>
     );
   }
 
@@ -73,7 +77,9 @@ const Banner = () => {
         className="h-full"
       >
         {activeImages.map((banner) => (
-          <SwiperSlide key={banner._id || banner.id}>
+          <SwiperSlide
+
+            key={banner._id || banner.id}>
             <div className="relative h-full">
               <div
                 className="absolute inset-0 bg-cover bg-center"
@@ -110,7 +116,7 @@ const Banner = () => {
                   <motion.button
                     whileHover={{ scale: 1.05 }}
                     whileTap={{ scale: 0.95 }}
-                    className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-8 rounded-lg transition-colors text-sm sm:text-base"
+                    className="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4 sm:py-3 sm:px-8 rounded-lg transition-colors text-sm sm:text-base"
                   >
                     Explore Products
                   </motion.button>

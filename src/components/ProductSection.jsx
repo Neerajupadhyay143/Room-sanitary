@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { client } from '../lib/sanity';
 import ProductCard from './ProductCard';
+import s from "../assets/Products/s.jpg";
+import s2 from "../assets/Products/s2.jpg";
+import s3 from "../assets/Products/s3.jpeg";
 
 const ProductSection = () => {
   const [products, setProducts] = useState([]);
@@ -10,7 +12,7 @@ const ProductSection = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const query = `*[_type == "product"] | order(_createdAt desc) [0..5] {
+        const query = `*[_type == "product"]{
           _id,
           name,
           slug,
@@ -20,44 +22,46 @@ const ProductSection = () => {
           price,
           category
         }`;
-        
-        const fetchedProducts = await client.fetch(query);
-        setProducts(fetchedProducts);
+        const result = await client.fetch(query);
+        setProducts(result);
       } catch (error) {
-        console.error('Error fetching products:', error);
-        // Fallback demo data
-        setProducts([
+        console.error("Error fetching products from Sanity:", error);
+
+    
+        const demoProducts = [
           {
             _id: '1',
             name: 'Premium Shower Head',
             slug: { current: 'premium-shower-head' },
-            image: { asset: { _ref: 'demo' } },
+            image: s,
             shortDescription: 'Experience luxury with our rainfall shower head featuring multiple spray patterns.',
-            description: 'Full description here...',
+            description: 'Full description for Premium Shower Head.',
             price: 149.99,
-            category: 'Shower',
+            category: 'shower',
           },
           {
             _id: '2',
             name: 'Modern Bathroom Vanity',
             slug: { current: 'modern-bathroom-vanity' },
-            image: { asset: { _ref: 'demo' } },
+            image: s2,
             shortDescription: 'Sleek and functional vanity with ample storage space.',
-            description: 'Full description here...',
+            description: 'Full description for Modern Bathroom Vanity.',
             price: 899.99,
-            category: 'Vanity',
+            category: 'vanity',
           },
           {
             _id: '3',
             name: 'LED Mirror with Touch Controls',
             slug: { current: 'led-mirror-touch' },
-            image: { asset: { _ref: 'demo' } },
+            image: s3,
             shortDescription: 'Smart mirror with built-in LED lighting and touch controls.',
-            description: 'Full description here...',
+            description: 'Full description for LED Mirror.',
             price: 299.99,
-            category: 'Mirror',
+            category: 'mirror',
           },
-        ]);
+        ];
+
+        setProducts(demoProducts);
       } finally {
         setLoading(false);
       }
@@ -67,43 +71,18 @@ const ProductSection = () => {
   }, []);
 
   if (loading) {
-    return (
-      <div className="py-8 sm:py-12 lg:py-16 bg-white">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">Loading products...</div>
-        </div>
-      </div>
-    );
+    return <div className="text-center py-10">Loading...</div>;
   }
 
   return (
-    <div className="py-8 sm:py-12 lg:py-16 bg-white">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="text-center mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">
-            Featured Products
-          </h2>
-          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-            Discover our curated selection of premium bathroom essentials designed to elevate your daily routine.
-          </p>
-        </div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mb-8 sm:mb-12">
-          {products.map((product) => (
-            <ProductCard key={product._id} product={product} />
-          ))}
-        </div>
-
-        <div className="text-center">
-          <Link
-            to="/products"
-            className="inline-block bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-6 sm:py-3 sm:px-8 rounded-lg transition-colors text-sm sm:text-base"
-          >
-            View All Products
-          </Link>
-        </div>
+    <section className="py-12 px-4 md:px-12">
+      <h2 className="text-3xl font-bold mb-8 text-center">Our Products</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        {products.slice(0 ,3).map((product) => (
+          <ProductCard key={product._id} product={product} />
+        ))}
       </div>
-    </div>
+    </section>
   );
 };
 

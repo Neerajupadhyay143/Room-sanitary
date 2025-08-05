@@ -3,6 +3,10 @@ import { useSearchParams } from 'react-router-dom';
 import { client } from '../lib/sanity';
 import ProductCard from '../components/ProductCard';
 import { Search } from 'lucide-react';
+import { Skeleton, Box } from '@mui/material';
+import s from "../assets/Products/s.jpg"
+import s2 from "../assets/Products/s2.jpg"
+import s3 from "../assets/Products/s3.jpeg"
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -14,88 +18,236 @@ const Products = () => {
 
   const categories = ['all', 'shower', 'vanity', 'mirror', 'toilet', 'accessories'];
 
+  const demoProducts = [
+    {
+      _id: '1',
+      name: 'Premium Shower Head',
+      slug: { current: 'premium-shower-head' },
+      image: s,
+      shortDescription: 'Experience luxury with our rainfall shower head featuring multiple spray patterns.',
+      description: 'Full description for Premium Shower Head.',
+      price: 149.99,
+      category: 'shower',
+    },
+    {
+      _id: '2',
+      name: 'Modern Bathroom Vanity',
+      slug: { current: 'modern-bathroom-vanity' },
+      image: s2,
+      shortDescription: 'Sleek and functional vanity with ample storage space.',
+      description: 'Full description for Modern Bathroom Vanity.',
+      price: 899.99,
+      category: 'vanity',
+    },
+    {
+      _id: '3',
+      name: 'LED Mirror with Touch Controls',
+      slug: { current: 'led-mirror-touch' },
+      image: s3,
+      shortDescription: 'Smart mirror with built-in LED lighting and touch controls.',
+      description: 'Full description for LED Mirror.',
+      price: 299.99,
+      category: 'mirror',
+    },
+    {
+      _id: '4',
+      name: 'Ceramic Bathroom Sink',
+      slug: { current: 'ceramic-bathroom-sink' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Stylish and durable ceramic sink for modern bathrooms.',
+      description: 'Full description here...',
+      price: 129.99,
+      category: 'sink',
+    },
+    {
+      _id: '5',
+      name: 'Luxury Bathtub',
+      slug: { current: 'luxury-bathtub' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Freestanding luxury bathtub for a relaxing bath experience.',
+      description: 'Full description here...',
+      price: 1199.99,
+      category: 'bathtub',
+    },
+    {
+      _id: '6',
+      name: 'Wall Mounted Towel Rack',
+      slug: { current: 'wall-mounted-towel-rack' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Chrome finish towel rack with multiple bars.',
+      description: 'Full description here...',
+      price: 49.99,
+      category: 'accessories',
+    },
+    {
+      _id: '7',
+      name: 'Toilet Paper Holder',
+      slug: { current: 'toilet-paper-holder' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Simple and elegant toilet paper holder.',
+      description: 'Full description here...',
+      price: 19.99,
+      category: 'accessories',
+    },
+    {
+      _id: '8',
+      name: 'Anti-Slip Bath Mat',
+      slug: { current: 'anti-slip-bath-mat' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Soft microfiber mat with anti-slip bottom.',
+      description: 'Full description here...',
+      price: 24.99,
+      category: 'mat',
+    },
+    {
+      _id: '9',
+      name: 'Smart Toilet with Bidet',
+      slug: { current: 'smart-toilet-bidet' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'High-tech toilet with built-in bidet and auto flush.',
+      description: 'Full description here...',
+      price: 1499.99,
+      category: 'toilet',
+    },
+    {
+      _id: '10',
+      name: 'Bathroom Storage Cabinet',
+      slug: { current: 'bathroom-storage-cabinet' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Vertical cabinet for storing bathroom essentials.',
+      description: 'Full description here...',
+      price: 259.99,
+      category: 'storage',
+    },
+    {
+      _id: '11',
+      name: 'LED Shower Panel',
+      slug: { current: 'led-shower-panel' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Shower panel with LED lights and multiple jets.',
+      description: 'Full description here...',
+      price: 599.99,
+      category: 'shower',
+    },
+    {
+      _id: '12',
+      name: 'Wall-Mounted Soap Dispenser',
+      slug: { current: 'soap-dispenser' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Convenient soap dispenser for handwashing.',
+      description: 'Full description here...',
+      price: 29.99,
+      category: 'accessories',
+    },
+    {
+      _id: '13',
+      name: 'Bathroom Shelf Set',
+      slug: { current: 'bathroom-shelf-set' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Set of 3 wooden shelves for bathroom storage.',
+      description: 'Full description here...',
+      price: 89.99,
+      category: 'storage',
+    },
+    {
+      _id: '14',
+      name: 'Frameless Glass Shower Enclosure',
+      slug: { current: 'glass-shower-enclosure' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Minimalistic frameless glass design.',
+      description: 'Full description here...',
+      price: 1099.99,
+      category: 'shower',
+    },
+    {
+      _id: '15',
+      name: 'Bathroom Faucet Set',
+      slug: { current: 'bathroom-faucet-set' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Modern faucet set with chrome finish.',
+      description: 'Full description here...',
+      price: 199.99,
+      category: 'faucet',
+    },
+    {
+      _id: '16',
+      name: 'Compact Bathroom Heater',
+      slug: { current: 'bathroom-heater' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Wall-mounted heater for quick warmth.',
+      description: 'Full description here...',
+      price: 149.99,
+      category: 'heater',
+    },
+    {
+      _id: '17',
+      name: 'Luxury Bath Towels Set',
+      slug: { current: 'bath-towels-set' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Set of ultra-soft and absorbent towels.',
+      description: 'Full description here...',
+      price: 69.99,
+      category: 'towels',
+    },
+    {
+      _id: '18',
+      name: 'LED Vanity Light Bar',
+      slug: { current: 'led-vanity-light' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Bright LED lighting bar for vanities.',
+      description: 'Full description here...',
+      price: 79.99,
+      category: 'lighting',
+    },
+    {
+      _id: '19',
+      name: 'Touchless Trash Can',
+      slug: { current: 'touchless-trash-can' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Sensor-based trash bin for hygiene.',
+      description: 'Full description here...',
+      price: 99.99,
+      category: 'accessories',
+    },
+    {
+      _id: '20',
+      name: 'Scented Bathroom Diffuser',
+      slug: { current: 'bathroom-diffuser' },
+      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+      shortDescription: 'Keep your bathroom fresh and aromatic.',
+      description: 'Full description here...',
+      price: 39.99,
+      category: 'fragrance',
+    },
+  ];
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const query = `*[_type == "product"] | order(_createdAt desc) {
-          _id,
-          name,
-          slug,
-          image,
-          shortDescription,
-          description,
-          price,
-          category
-        }`;
-        
+            _id,
+            name,
+            slug,
+            image,
+            shortDescription,
+            description,
+            price,
+            category
+          }`;
+
         const fetchedProducts = await client.fetch(query);
-        setProducts(fetchedProducts);
-        setFilteredProducts(fetchedProducts);
+        if (!fetchedProducts || fetchedProducts.length === 0) {
+          // Agar products nahi mile to fallback
+          setProducts(demoProducts);
+          setFilteredProducts(demoProducts);
+        } else {
+          setProducts(fetchedProducts);
+          setFilteredProducts(fetchedProducts);
+        }
+
       } catch (error) {
         console.error('Error fetching products:', error);
         // Fallback demo data
-        const demoProducts = [
-          {
-            _id: '1',
-            name: 'Premium Shower Head',
-            slug: { current: 'premium-shower-head' },
-            image: { asset: { _ref: 'demo' } },
-            shortDescription: 'Experience luxury with our rainfall shower head featuring multiple spray patterns.',
-            description: 'Full description here...',
-            price: 149.99,
-            category: 'shower',
-          },
-          {
-            _id: '2',
-            name: 'Modern Bathroom Vanity',
-            slug: { current: 'modern-bathroom-vanity' },
-            image: { asset: { _ref: 'demo' } },
-            shortDescription: 'Sleek and functional vanity with ample storage space.',
-            description: 'Full description here...',
-            price: 899.99,
-            category: 'vanity',
-          },
-          {
-            _id: '3',
-            name: 'LED Mirror with Touch Controls',
-            slug: { current: 'led-mirror-touch' },
-            image: { asset: { _ref: 'demo' } },
-            shortDescription: 'Smart mirror with built-in LED lighting and touch controls.',
-            description: 'Full description here...',
-            price: 299.99,
-            category: 'mirror',
-          },
-          {
-            _id: '4',
-            name: 'Luxury Toilet Seat',
-            slug: { current: 'luxury-toilet-seat' },
-            image: { asset: { _ref: 'demo' } },
-            shortDescription: 'Comfortable and hygienic toilet seat with soft-close technology.',
-            description: 'Full description here...',
-            price: 89.99,
-            category: 'toilet',
-          },
-          {
-            _id: '5',
-            name: 'Towel Warmer Rack',
-            slug: { current: 'towel-warmer-rack' },
-            image: { asset: { _ref: 'demo' } },
-            shortDescription: 'Electric towel warmer to keep your towels cozy and dry.',
-            description: 'Full description here...',
-            price: 199.99,
-            category: 'accessories',
-          },
-          {
-            _id: '6',
-            name: 'Spa Shower System',
-            slug: { current: 'spa-shower-system' },
-            image: { asset: { _ref: 'demo' } },
-            shortDescription: 'Complete shower system with body jets and rainfall head.',
-            description: 'Full description here...',
-            price: 1299.99,
-            category: 'shower',
-          },
-        ];
+        ;
         setProducts(demoProducts);
         setFilteredProducts(demoProducts);
       } finally {
@@ -116,36 +268,27 @@ const Products = () => {
   useEffect(() => {
     let filtered = products;
 
-    // Filter by category
     if (selectedCategory !== 'all') {
-      filtered = filtered.filter(product => 
-        product.category.toLowerCase() === selectedCategory
+      filtered = filtered.filter(product =>
+        product.category?.toLowerCase() === selectedCategory
       );
     }
 
-    // Filter by search query
     if (searchQuery) {
       filtered = filtered.filter(product =>
-        product.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.shortDescription.toLowerCase().includes(searchQuery.toLowerCase())
+        product.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        product.shortDescription?.toLowerCase().includes(searchQuery.toLowerCase())
       );
     }
 
     setFilteredProducts(filtered);
   }, [products, selectedCategory, searchQuery]);
 
-  if (loading) {
-    return (
-      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
-        <div className="text-xl">Loading products...</div>
-      </div>
-    );
-  }
 
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-blue-600 text-white py-12 sm:py-16">
+      <div className="bg-gray-700 text-white py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
@@ -166,11 +309,10 @@ const Products = () => {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-3 py-2 sm:px-4 rounded-lg font-medium transition-colors text-sm sm:text-base ${
-                  selectedCategory === category
-                    ? 'bg-blue-600 text-white'
-                    : 'bg-white text-gray-700 hover:bg-gray-100'
-                }`}
+                className={`px-3 py-2 sm:px-4 rounded-lg font-medium transition-colors text-sm sm:text-base ${selectedCategory === category
+                  ? 'bg-blue-600 text-white'
+                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                  }`}
               >
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </button>
@@ -189,8 +331,18 @@ const Products = () => {
           </div>
         </div>
 
-        {/* Products Grid */}
-        {filteredProducts.length > 0 ? (
+        {/* Products Grid or Skeleton */}
+        {loading ? (
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+            {[...Array(6)].map((_, i) => (
+              <Box key={i} className="rounded-lg shadow-sm p-4 bg-white">
+                <Skeleton variant="rectangular" height={350} className="mb-4 rounded" />
+                <Skeleton width="80%" className="mb-2" />
+                <Skeleton width="60%" />
+              </Box>
+            ))}
+          </div>
+        ) : filteredProducts.length > 0 ? (
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             {filteredProducts.map((product) => (
               <ProductCard key={product._id} product={product} />

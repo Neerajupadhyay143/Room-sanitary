@@ -30,15 +30,16 @@ const About = () => {
   return (
     <div className="min-h-screen bg-gray-50">
       {/* Hero Section */}
-      <div className="bg-blue-600 text-white py-12 sm:py-16">
+      <div className="bg-gray-700 text-white py-12 sm:py-16">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center">
             <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
-              About Bathroom Essentials
+              About Mirelo Bathrooms
             </h1>
             <p className="text-lg sm:text-xl max-w-2xl mx-auto">
-              Transforming bathrooms with premium quality and innovative design since 1995
+              Crafted with care to elevate your everyday comfort — where style meets purpose.
             </p>
+
           </div>
         </div>
       </div>
@@ -67,17 +68,17 @@ const About = () => {
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
               <p className="text-base sm:text-lg text-gray-600 mb-6">
-                Founded in 1995 by a team of passionate designers and engineers, Bathroom Essentials 
-                started with a simple mission: to make beautiful, functional bathroom fixtures 
+                Founded in 1995 by a team of passionate designers and engineers, Bathroom Essentials
+                started with a simple mission: to make beautiful, functional bathroom fixtures
                 accessible to everyone.
               </p>
               <p className="text-base sm:text-lg text-gray-600 mb-6">
-                Over the years, we've grown from a small family business to a trusted name in 
-                bathroom design, but our commitment to quality and customer satisfaction remains 
+                Over the years, we've grown from a small family business to a trusted name in
+                bathroom design, but our commitment to quality and customer satisfaction remains
                 unchanged.
               </p>
               <p className="text-base sm:text-lg text-gray-600">
-                Today, we continue to innovate and push the boundaries of bathroom design, 
+                Today, we continue to innovate and push the boundaries of bathroom design,
                 always keeping our customers' needs at the heart of everything we do.
               </p>
             </div>
@@ -98,7 +99,7 @@ const About = () => {
           <div className="text-center mb-8 sm:mb-12">
             <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-4">Meet Our Team</h2>
             <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto">
-              Our dedicated team of professionals is committed to bringing you the best in 
+              Our dedicated team of professionals is committed to bringing you the best in
               bathroom design and functionality.
             </p>
           </div>
@@ -133,7 +134,7 @@ const About = () => {
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Quality First</h3>
               <p className="text-sm sm:text-base text-gray-600">
-                We never compromise on quality. Every product is rigorously tested to ensure 
+                We never compromise on quality. Every product is rigorously tested to ensure
                 it meets our high standards.
               </p>
             </div>
@@ -144,7 +145,7 @@ const About = () => {
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Customer Focus</h3>
               <p className="text-sm sm:text-base text-gray-600">
-                Our customers are at the heart of everything we do. We listen, we learn, 
+                Our customers are at the heart of everything we do. We listen, we learn,
                 and we deliver solutions that exceed expectations.
               </p>
             </div>
@@ -155,7 +156,7 @@ const About = () => {
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Innovation</h3>
               <p className="text-sm sm:text-base text-gray-600">
-                We continuously innovate to bring you the latest in bathroom technology 
+                We continuously innovate to bring you the latest in bathroom technology
                 and design trends.
               </p>
             </div>

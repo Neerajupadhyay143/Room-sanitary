@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { client, getImageUrl } from '../lib/sanity';
-import MediaS1 from "../assets/MediaSection/MediaS1.jpg"
+import { Skeleton } from '@mui/material';
+import MediaS1 from "../assets/MediaSection/MediaS1.jpg";
+import MediaTake1 from "../assets/MediaSection/MediaTake1.mp4"
 
 const MediaSection = () => {
   const [mediaContent, setMediaContent] = useState([]);
@@ -22,14 +24,14 @@ const MediaSection = () => {
         setMediaContent(content);
       } catch (error) {
         console.error('Error fetching media content:', error);
-        // Fallback demo data
         setMediaContent([
           {
             _id: '1',
             title: 'Quality You Can Trust',
             type: 'image',
-            image: { asset: { _ref: 'demo' } },
-            description: 'Our bathroom essentials are crafted with precision and built to last, ensuring your bathroom remains beautiful and functional for years to come.',
+            image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
+            description:
+              'Our bathroom essentials are crafted with precision and built to last, ensuring your bathroom remains beautiful and functional for years to come.',
           },
         ]);
       } finally {
@@ -43,8 +45,20 @@ const MediaSection = () => {
   if (loading) {
     return (
       <div className="py-8 sm:py-12 lg:py-16 bg-gray-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center">Loading content...</div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12 lg:space-y-16">
+          {[1, 2].map((_, index) => (
+            <div key={index} className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+              <div className="space-y-4 sm:space-y-6">
+                <Skeleton variant="text" width="60%" height={40} />
+                <Skeleton variant="text" width="100%" height={20} />
+                <Skeleton variant="text" width="95%" height={20} />
+                <Skeleton variant="rectangular" width={140} height={40} sx={{ borderRadius: 2 }} />
+              </div>
+              <div className="relative">
+                <Skeleton variant="rectangular" height={320} sx={{ borderRadius: 2 }} />
+              </div>
+            </div>
+          ))}
         </div>
       </div>
     );
@@ -52,43 +66,55 @@ const MediaSection = () => {
 
   return (
     <div className="py-8 sm:py-12 lg:py-16 bg-gray-50">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="space-y-12 lg:space-y-16">
-          {mediaContent.map((media, index) => (
-            <div key={media._id} className={`grid lg:grid-cols-2 gap-8 lg:gap-12 items-center ${index % 2 === 1 ? 'lg:grid-flow-col-dense' : ''}`}>
-              <div className={`space-y-4 sm:space-y-6 ${index % 2 === 1 ? 'lg:col-start-2' : ''}`}>
-                <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">
-                  {media.title}
-                </h2>
-                <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
-                  {media.description}
-                </p>
-                <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
-                  Learn More
-                </button>
-              </div>
-              <div className={`relative ${index % 2 === 1 ? 'lg:col-start-1 lg:row-start-1' : ''}`}>
-                {media.type === 'image' ? (
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-20">
+        {/* Image Section */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
 
-                  <div className="overflow-hidden rounded-lg shadow-lg group">
-                    <img
-                      // src={media.image?.asset ? getImageUrl(media.image) : MediaS1}
-                      src={MediaS1}
-                      alt={media.title}
-                      className="w-full h-64 sm:h-80 object-cover transition-transform duration-500 group-hover:scale-110"
-                    />
-                  </div>
+          <div className="space-y-4 sm:space-y-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Premium Bathroom Essentials</h2>
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+              Our bathroom essentials are crafted with precision and built to last, ensuring your bathroom remains beautiful and functional for years to come.
+            </p>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
+              Learn More
+            </button>
+          </div>
+          <div className="overflow-hidden rounded-lg shadow-lg group">
+            <img
+              src={MediaS1}
+              alt="High Quality Image"
+              className="w-full h-64 sm:h-80 object-cover transition-transform duration-500 group-hover:scale-110"
+            />
+          </div>
 
-
-                ) : (
-                  <div className="w-full h-64 sm:h-80 bg-gray-300 rounded-lg shadow-lg flex items-center justify-center">
-                    <span className="text-gray-600">Video Content</span>
-                  </div>
-                )}
-              </div>
-            </div>
-          ))}
         </div>
+
+        {/* Video Section */}
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          {/* Video Left */}
+          <div className="relative w-full h-64 sm:h-80 bg-black rounded-lg overflow-hidden shadow-lg">
+            <video
+              src={MediaTake1}
+              className="w-full h-full object-cover"
+              autoPlay
+              muted
+              loop
+              playsInline
+            />
+          </div>
+
+          {/* Text Right */}
+          <div className="space-y-4 sm:space-y-6">
+            <h2 className="text-2xl sm:text-3xl font-bold text-gray-900">Experience in Action</h2>
+            <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
+              Watch how our products transform ordinary spaces into elegant retreats. Built with quality, designed for comfort.
+            </p>
+            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
+              Watch Video
+            </button>
+          </div>
+        </div>
+
       </div>
     </div>
   );

@@ -8,6 +8,8 @@ import Products from './pages/Products';
 import ProductDetail from './pages/ProductDetail';
 import Retailers from './pages/Retailers';
 import Contact from './pages/Contact';
+import BrochurePage from './pages/BrochurePage';
+import NotFound from './pages/NotFound.jsx';
 
 function App() {
   return (
@@ -22,6 +24,8 @@ function App() {
             <Route path="/products/:slug" element={<ProductDetail />} />
             <Route path="/retailers" element={<Retailers />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/Brochure" element={<BrochurePage />} />
+            <Route path="*" element={<NotFound />} />
             {/* Placeholder routes for footer links */}
             <Route path="/terms" element={<div className="min-h-screen bg-gray-50 flex items-center justify-center px-4"><h1 className="text-xl sm:text-2xl text-center">Terms & Conditions - Coming Soon</h1></div>} />
             <Route path="/privacy" element={<div className="min-h-screen bg-gray-50 flex items-center justify-center px-4"><h1 className="text-xl sm:text-2xl text-center">Privacy Policy - Coming Soon</h1></div>} />

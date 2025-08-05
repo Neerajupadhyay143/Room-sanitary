@@ -46,6 +46,7 @@ const FAQSection = () => {
                         <div
                             key={index}
                             className="bg-gray-100 rounded shadow"
+
                         >
                             <button
                                 onClick={() => toggle(index)}

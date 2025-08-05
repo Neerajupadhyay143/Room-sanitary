@@ -1,5 +1,14 @@
 import React from 'react';
-import { Facebook, Instagram, Twitter, Linkedin, Youtube, MessageCircle } from 'lucide-react';
+import {
+  Facebook,
+  Instagram,
+  Twitter,
+  Linkedin,
+  Youtube,
+  MessageCircle,
+  Phone,
+  Mail
+} from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
@@ -16,11 +25,7 @@ const Footer = () => {
                 key={index}
                 className="w-full aspect-square flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-lg shadow transition"
               >
-                <svg
-                  fill="currentColor"
-                  viewBox="0 0 24 24"
-                  className="w-6 h-6 text-white"
-                >
+                <svg fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6 text-white">
                   <path d="M10 17l6-5-6-5v10z" />
                 </svg>
               </button>
@@ -28,33 +33,16 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* Social Links */}
         <div>
           <h3 className="font-semibold mb-4 text-white">Social Links</h3>
           <ul className="space-y-3 text-sm text-gray-300">
-            <li className="flex items-center space-x-2">
-              <Facebook className="h-4 w-4" />
-              <span>Facebook</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <Instagram className="h-4 w-4" />
-              <span>Instagram</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <Twitter className="h-4 w-4" />
-              <span>Twitter</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <Linkedin className="h-4 w-4" />
-              <span>LinkedIn</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <Youtube className="h-4 w-4" />
-              <span>YouTube</span>
-            </li>
-            <li className="flex items-center space-x-2">
-              <MessageCircle className="h-4 w-4" />
-              <span>Whatsapp</span>
-            </li>
+            <li className="flex items-center space-x-2"><Facebook className="h-4 w-4" /><span>Facebook</span></li>
+            <li className="flex items-center space-x-2"><Instagram className="h-4 w-4" /><span>Instagram</span></li>
+            <li className="flex items-center space-x-2"><Twitter className="h-4 w-4" /><span>Twitter</span></li>
+            <li className="flex items-center space-x-2"><Linkedin className="h-4 w-4" /><span>LinkedIn</span></li>
+            <li className="flex items-center space-x-2"><Youtube className="h-4 w-4" /><span>YouTube</span></li>
+            <li className="flex items-center space-x-2"><MessageCircle className="h-4 w-4" /><span>Whatsapp</span></li>
           </ul>
         </div>
 
@@ -81,17 +69,51 @@ const Footer = () => {
           </ul>
         </div>
 
-        {/* Talk To Us */}
+        {/* Talk To Us + Contact Info */}
         <div>
           <h3 className="font-semibold mb-4 text-white">Talk To Us</h3>
           <ul className="space-y-3 text-sm text-gray-300">
             <li><Link to="/feedback">Feedback</Link></li>
             <li><Link to="/contact">Contact Us</Link></li>
+            <li className="flex items-center space-x-2">
+              <Phone className="h-4 w-4 font-bold" /><span>07393282490
+              </span>
+            </li>
+            <li className="flex items-center space-x-2">
+              <Mail className="h-4 w-4 font-bold" /><span>taran@mirelo.co.uk</span>
+            </li>
           </ul>
         </div>
+
+      </div>
+
+      {/* 📍 Company Address - Full Width */}
+      <div className="border-t border-gray-700 mt-10 pt-6 px-4 text-sm text-gray-400 text-center w-full space-y-2 mb-4">
+        <p>
+          <a
+            href="https://www.google.com/maps?q=The+Old+Ferrari+Garage,+Rugby+Road,+Brandon,+Coventry,+CV8+3GH"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-400 transition-colors underline"
+          >
+            The Old Ferrari Garage, Rugby Road, Brandon, Coventry, CV8 3GH
+          </a>
+        </p>
+        <p>
+          <a
+            href="https://www.google.com/maps?q=Unit+H,+Kelvin+Road,+Greenbridge+Industrial+Estate,+Swindon,+SN3+3JW"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:text-blue-400 transition-colors underline"
+          >
+            Unit H, Kelvin Road, Greenbridge Industrial Estate, Swindon, SN3 3JW
+          </a>
+        </p>
+        <p className="mt-2">
+          Mirelo LTD UK and Wales Registration Number: 12840417
+        </p>
       </div>
     </footer>
-
   );
 };
 

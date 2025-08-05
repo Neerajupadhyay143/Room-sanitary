@@ -33,7 +33,7 @@ const ProductDetail = () => {
           _id: '1',
           name: 'Premium Shower Head',
           slug: { current: 'premium-shower-head' },
-          image: { asset: { _ref: 'demo' } },
+          image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
           shortDescription: 'Experience luxury with our rainfall shower head featuring multiple spray patterns.',
           description: 'Transform your daily shower routine into a spa-like experience with our premium rainfall shower head. Featuring multiple spray patterns including rainfall, massage, and mist modes, this shower head is crafted from high-quality materials for lasting durability. The easy-clean nozzles prevent mineral buildup, while the universal connection fits most standard shower arms. With its sleek chrome finish and modern design, this shower head complements any bathroom decor.',
           price: 149.99,
