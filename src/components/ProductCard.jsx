@@ -21,7 +21,7 @@ const ProductCard = ({ product }) => {
         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300" />
       </div>
 
-      <div className="p-4 sm:py-6 bg-gray-200">
+      <div className="p-4 sm:py-6 min-h-full bg-gray-200">
         <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 group-hover:text-gray-500 transition-colors">
           {product?.name}
         </h3>
