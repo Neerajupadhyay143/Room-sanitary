@@ -77,6 +77,7 @@ const ProductSection = () => {
   return (
     <section className="py-12 px-4 md:px-12">
       <h2 className="text-3xl font-bold mb-8 text-center">Our Products</h2>
+
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
         {products.slice(0 ,3).map((product) => (
           <ProductCard key={product._id} product={product} />

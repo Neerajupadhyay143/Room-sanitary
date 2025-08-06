@@ -16,7 +16,7 @@ const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchParams] = useSearchParams();
 
-  const categories = ['all', 'shower', 'vanity', 'mirror', 'toilet', 'accessories'];
+  const categories = ['all', 'shower', 'vanity', 'mirror', 'toilet', 'accessories', 'furniture'];
 
   const demoProducts = [
     {
@@ -223,22 +223,31 @@ const Products = () => {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const query = `*[_type == "product"] | order(_createdAt desc) {
-            _id,
-            name,
-            slug,
-            image,
-            shortDescription,
-            description,
-            price,
-            category
-          }`;
+        const query = `*[_type == "product"] {
+  _id,
+  name,
+  slug,
+  image,
+  shortDescription,
+  description,
+  price {
+    unitPrice,
+    basinPrice,
+    combinedPrice
+  },
+  category
+}`;
+
+
 
         const fetchedProducts = await client.fetch(query);
         if (!fetchedProducts || fetchedProducts.length === 0) {
           // Agar products nahi mile to fallback
           setProducts(demoProducts);
           setFilteredProducts(demoProducts);
+
+          console.log("Fetched Products from Sanity:", fetchedProducts);
+
         } else {
           setProducts(fetchedProducts);
           setFilteredProducts(fetchedProducts);
@@ -310,7 +319,7 @@ const Products = () => {
                 key={category}
                 onClick={() => setSelectedCategory(category)}
                 className={`px-3 py-2 sm:px-4 rounded-lg font-medium transition-colors text-sm sm:text-base ${selectedCategory === category
-                  ? 'bg-blue-600 text-white'
+                  ? 'bg-gray-700 text-white'
                   : 'bg-white text-gray-700 hover:bg-gray-100'
                   }`}
               >

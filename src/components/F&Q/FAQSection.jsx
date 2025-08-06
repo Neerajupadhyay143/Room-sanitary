@@ -38,7 +38,7 @@ const FAQSection = () => {
                     Frequently Asked Questions
                 </h2>
                 <div className="flex justify-center mb-10">
-                    <div className="w-20 h-1 bg-blue-500 rounded-full"></div>
+                    <div className="w-20 h-1 bg-gray-700 rounded-full"></div>
                 </div>
 
                 <div className="space-y-4">

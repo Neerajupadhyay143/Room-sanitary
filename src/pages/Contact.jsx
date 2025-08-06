@@ -19,18 +19,21 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Handle form submission here
-    console.log('Form submitted:', formData);
-    // Reset form
-    setFormData({
-      name: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: '',
-    });
-    alert('Thank you for your message! We\'ll get back to you soon.');
+
+    // Compose the mailto link
+    const mailtoLink = `mailto:neerajkumarsharma013@gmail.com?subject=${encodeURIComponent(
+      formData.subject
+    )}&body=${encodeURIComponent(
+      `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\nMessage:\n${formData.message}`
+    )}`;
+
+    // Open default mail client with filled data
+    window.location.href = mailtoLink;
+
+    console.log("mail here :", mailtoLink)
   };
+
+
 
   const contactInfo = [
     {
@@ -48,7 +51,7 @@ Mirelo LTD UK and Wales Registration Number: 12840417`],
     {
       icon: Mail,
       title: 'Email Us',
-      details: ['taran@mirelo.co.uk']
+      details: ['info@mirelo.co.uk']
     },
     {
       icon: Clock,
@@ -92,7 +95,7 @@ Mirelo LTD UK and Wales Registration Number: 12840417`],
                     required
                     value={formData.name}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm sm:text-base outline-none"
                   />
                 </div>
 
@@ -107,7 +110,7 @@ Mirelo LTD UK and Wales Registration Number: 12840417`],
                     required
                     value={formData.email}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm sm:text-base outline-none"
                   />
                 </div>
               </div>
@@ -123,7 +126,7 @@ Mirelo LTD UK and Wales Registration Number: 12840417`],
                     name="phone"
                     value={formData.phone}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm sm:text-base outline-none"
                   />
                 </div>
 
@@ -137,7 +140,7 @@ Mirelo LTD UK and Wales Registration Number: 12840417`],
                     required
                     value={formData.subject}
                     onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm sm:text-base outline-none"
                   >
                     <option value="">Select a subject</option>
                     <option value="product-inquiry">Product Inquiry</option>
@@ -160,7 +163,7 @@ Mirelo LTD UK and Wales Registration Number: 12840417`],
                   rows={6}
                   value={formData.message}
                   onChange={handleChange}
-                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
+                  className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent text-sm sm:text-base outline-none"
                   placeholder="Please describe your inquiry or how we can help you..."
                 />
               </div>

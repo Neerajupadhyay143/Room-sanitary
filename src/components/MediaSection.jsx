@@ -75,7 +75,7 @@ const MediaSection = () => {
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
               Our bathroom essentials are crafted with precision and built to last, ensuring your bathroom remains beautiful and functional for years to come.
             </p>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
+            <button className="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
               Learn More
             </button>
           </div>
@@ -109,7 +109,7 @@ const MediaSection = () => {
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
               Watch how our products transform ordinary spaces into elegant retreats. Built with quality, designed for comfort.
             </p>
-            <button className="bg-blue-600 hover:bg-blue-700 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
+            <button className="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
               Watch Video
             </button>
           </div>

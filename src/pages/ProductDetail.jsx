@@ -7,42 +7,58 @@ const ProductDetail = () => {
   const { slug } = useParams();
   const [product, setProduct] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [relatedProducts, setRelatedProducts] = useState([]);
 
   useEffect(() => {
     const fetchProduct = async () => {
       if (!slug) return;
 
       try {
-        const query = `*[_type == "product" && slug.current == $slug][0] {
-          _id,
-          name,
-          slug,
-          image,
-          shortDescription,
-          description,
-          price,
-          category
-        }`;
-        
-        const fetchedProduct = await client.fetch(query, { slug });
-        setProduct(fetchedProduct);
+        const productQuery = `*[_type == "product" && slug.current == $slug][0] {
+      _id,
+      name,
+      slug,
+      image,
+      shortDescription,
+      description,
+      price {
+        unitPrice,
+        basinPrice,
+        combinedPrice
+      },
+      category
+    }`;
+
+        const currentProduct = await client.fetch(productQuery, { slug });
+
+        setProduct(currentProduct);
+
+        if (currentProduct?.category) {
+          const relatedQuery = `*[_type == "product" && category == $category && slug.current != $slug][0...4] {
+        _id,
+        name,
+        slug,
+        image,
+        shortDescription,
+        price {
+          combinedPrice
+        }
+      }`;
+
+          const related = await client.fetch(relatedQuery, {
+            category: currentProduct.category,
+            slug: slug,
+          });
+
+          setRelatedProducts(related);
+        }
       } catch (error) {
-        console.error('Error fetching product:', error);
-        // Fallback demo data
-        setProduct({
-          _id: '1',
-          name: 'Premium Shower Head',
-          slug: { current: 'premium-shower-head' },
-          image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
-          shortDescription: 'Experience luxury with our rainfall shower head featuring multiple spray patterns.',
-          description: 'Transform your daily shower routine into a spa-like experience with our premium rainfall shower head. Featuring multiple spray patterns including rainfall, massage, and mist modes, this shower head is crafted from high-quality materials for lasting durability. The easy-clean nozzles prevent mineral buildup, while the universal connection fits most standard shower arms. With its sleek chrome finish and modern design, this shower head complements any bathroom decor.',
-          price: 149.99,
-          category: 'Shower',
-        });
+        console.error('Error fetching product or related products:', error);
       } finally {
         setLoading(false);
       }
     };
+
 
     fetchProduct();
   }, [slug]);
@@ -75,7 +91,7 @@ const ProductDetail = () => {
         <div className="mb-6 sm:mb-8">
           <Link
             to="/products"
-            className="inline-flex items-center space-x-2 text-blue-600 hover:text-blue-700 font-medium text-sm sm:text-base"
+            className="inline-flex items-center space-x-2 text-gray-700 hover:text-gray-500 font-medium text-sm sm:text-base"
           >
             <ArrowLeft className="h-4 w-4" />
             <span>Back to Products</span>
@@ -111,21 +127,12 @@ const ProductDetail = () => {
 
               {product.price && (
                 <div className="mb-6">
-                  <span className="text-2xl sm:text-3xl font-bold text-blue-600">
-                    ${product.price.toFixed(2)}
+                  <span className="text-2xl sm:text-3xl font-bold text-gray-700">
+                    €{product.price.combinedPrice.toFixed(2)}
                   </span>
                 </div>
               )}
 
-              <div className="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4 mb-8">
-                <button className="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition-colors flex items-center justify-center space-x-2">
-                  <ShoppingCart className="h-5 w-5" />
-                  <span>Add to Cart</span>
-                </button>
-                <button className="p-3 border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors flex items-center justify-center">
-                  <Heart className="h-6 w-6 text-gray-600" />
-                </button>
-              </div>
 
               <div className="space-y-6">
                 <div>
@@ -146,9 +153,44 @@ const ProductDetail = () => {
                   </ul>
                 </div>
               </div>
+
             </div>
           </div>
         </div>
+
+        {relatedProducts?.length > 0 && (
+          <div className="mt-12">
+            <h2 className="text-2xl font-bold text-gray-900 mb-6">Related Products</h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+              {relatedProducts.map((item) => (
+                <Link
+                  key={item._id}
+                  to={`/products/${item.slug.current}`}
+                  className="bg-white rounded-lg shadow-md overflow-hidden transform transition duration-300 hover:scale-105 hover:bg-gray-50"
+                >
+                  <img
+                    src={item.image ? getImageUrl(item.image) : 'https://via.placeholder.com/300x200?text=No+Image'}
+                    alt={item.name}
+                    className="w-full h-48 object-cover"
+                  />
+                  <div className="p-4 bg-gray-200">
+                    <h3 className="text-lg font-semibold text-gray-900">{item.name}</h3>
+                    {item.shortDescription && (
+                      <p className="text-sm text-gray-600 mt-1 line-clamp-2">{item.shortDescription}</p>
+                    )}
+                    {item.price?.combinedPrice && (
+                      <p className="text-base font-bold text-gray-700 mt-2">
+                        €{item.price.combinedPrice.toFixed(2)}
+                      </p>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        )}
+
+
       </div>
     </div>
   );

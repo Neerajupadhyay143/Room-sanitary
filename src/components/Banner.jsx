@@ -74,7 +74,7 @@ const Banner = () => {
           disableOnInteraction: false,
         }}
         loop
-        className="h-full"
+        className="h-full text-white"
       >
         {activeImages.map((banner) => (
           <SwiperSlide

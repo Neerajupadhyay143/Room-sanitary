@@ -12,6 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
+  
   return (
     <footer className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white shadow-[0_-4px_10px_rgba(0,0,0,0.15)]">
       <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
@@ -76,11 +77,12 @@ const Footer = () => {
             <li><Link to="/feedback">Feedback</Link></li>
             <li><Link to="/contact">Contact Us</Link></li>
             <li className="flex items-center space-x-2">
-              <Phone className="h-4 w-4 font-bold" /><span>07393282490
+              <Phone className="h-4 w-4 font-bold" /><span>+44 7393 282490
               </span>
             </li>
             <li className="flex items-center space-x-2">
-              <Mail className="h-4 w-4 font-bold" /><span>taran@mirelo.co.uk</span>
+              <Mail className="h-4 w-4 font-bold" /><span>info@mirelo.co.uk
+              </span>
             </li>
           </ul>
         </div>
@@ -96,21 +98,14 @@ const Footer = () => {
             rel="noopener noreferrer"
             className="hover:text-blue-400 transition-colors underline"
           >
-            The Old Ferrari Garage, Rugby Road, Brandon, Coventry, CV8 3GH
+            Unit H, Kelvin Road, Swindon, SN3 3JW
+
+
           </a>
         </p>
-        <p>
-          <a
-            href="https://www.google.com/maps?q=Unit+H,+Kelvin+Road,+Greenbridge+Industrial+Estate,+Swindon,+SN3+3JW"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-blue-400 transition-colors underline"
-          >
-            Unit H, Kelvin Road, Greenbridge Industrial Estate, Swindon, SN3 3JW
-          </a>
-        </p>
+
         <p className="mt-2">
-          Mirelo LTD UK and Wales Registration Number: 12840417
+          Mirelo LTD UK and Wales Registration Number: 12840417
         </p>
       </div>
     </footer>

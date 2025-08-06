@@ -1,63 +1,64 @@
 import React from 'react';
+import logo from "../assets/logo/logo.png"
+import DownloadPDF from "../assets/downloaded_PDF/Brochure.pdf"
 
 const brochureItems = [
     {
-        id: 1,
-        title: 'Tiles Brochure',
-        imageUrl: '/path/to/tiles-brochure-image.jpg',
-        pdfUrl: '/tiles-brochure.pdf'
+        title: 'Mirelo Bathrooms',
+        description:
+            'At Mirelo Bathrooms, we specialize in delivering premium, stylish, and functional bathroom solutions designed to elevate your space. From innovative fittings to elegant fixtures, our products are crafted with quality and durability in mind. Discover how Mirelo can transform your bathroom into a space of comfort and luxury.',
+        image: logo,
     },
-    {
-        id: 2,
-        title: 'Latest Brochure Edition 6',
-        imageUrl: '/path/to/edition6-cover.jpg',
-        pdfUrl: '/edition6.pdf'
-    },
-    {
-        id: 3,
-        title: 'Radiator Brochure',
-        imageUrl: '/path/to/radiator-brochure.jpg',
-        pdfUrl: '/radiator-brochure.pdf'
-    }
 ];
 
-const BrochurePage = () => (
-    <div className="min-h-screen flex flex-col">
-        {/* Header */}
-        <header className="bg-white py-8">
-            <div className="container mx-auto text-center">
-                <h1 className="text-3xl font-semibold">Brochure</h1>
-                <p className="text-gray-500 mt-2">Home &raquo; Brochure</p>
-            </div>
-        </header>
 
-        {/* Brochure Items */}
-        <main className="flex-grow container mx-auto py-12 px-4">
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-8">
-                {brochureItems.map((item) => (
-                    <a
-                        key={item.id}
-                        href={item.pdfUrl}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="block border rounded-lg overflow-hidden hover:shadow-xl transition-shadow"
-                    >
-                        <img
-                            src={item.imageUrl}
-                            alt={item.title}
-                            className="w-full h-48 object-cover"
-                        />
-                        <div className="p-4 text-center">
-                            <p className="text-lg font-medium">{item.title}</p>
-                            <button className="mt-2 inline-block bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700">
-                                Download
-                            </button>
-                        </div>
-                    </a>
-                ))}
+const BrochurePage = () => {
+    return (
+        <div className="min-h-screen bg-gray-50">
+            {/* Hero Section */}
+            <div className="bg-gray-700 text-white py-12 sm:py-16">
+                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div className="text-center">
+                        <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold mb-4">
+                            Brochure
+                        </h1>
+                    </div>
+                </div>
             </div>
-        </main>
-    </div>
-);
+
+            {/* Brochure Items */}
+            <div className="max-w-7xl mx-auto px-4 py-12">
+                <div className="grid gap-10 justify-center items-center md:grid-cols-3">
+                    {brochureItems.map((item, index) => (
+                        <div
+                            key={index}
+                            className="bg-white rounded-lg shadow-md overflow-hidden transition-transform hover:scale-105"
+                        >
+                            <img
+                                src={item.image}
+                                alt={item.title}
+                                className="w-full h-60 object-contain"
+                            />
+                            <div className="p-6 w-full">
+                                <h2 className="text-xl font-semibold mb-2">{item.title}</h2>
+                                <p className="text-gray-600 mb-4">{item.description}</p>
+
+                                {/* Download PDF Button */}
+                                <a
+                                    href={DownloadPDF}
+                                    download
+                                    className=" bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-500 transition-colors text-sm w-full"
+                                >
+                                    Download Brochure
+                                </a>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
+
+        </div>
+    );
+};
 
 export default BrochurePage;
