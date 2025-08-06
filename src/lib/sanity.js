@@ -2,10 +2,10 @@ import { createClient } from '@sanity/client';
 import imageUrlBuilder from '@sanity/image-url';
 
 export const client = createClient({
-  projectId: import.meta.env.VITE_SANITY_PROJECT_ID,
-  dataset: import.meta.env.VITE_SANITY_DATASET,
+  projectId: import.meta.env.VITE_SANITY_PROJECT_ID || "xbqu5k94",
+  dataset: import.meta.env.VITE_SANITY_DATASET || "production",
   useCdn: true,
-  apiVersion: import.meta.env.VITE_SANITY_API_VERSION,
+  apiVersion: import.meta.env.VITE_SANITY_API_VERSION || "2023-01-01",
 });
 
 // ✅ Image URL builder function
