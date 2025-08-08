@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
+
 import { useSearchParams } from 'react-router-dom';
 import { client } from '../lib/sanity';
 import ProductCard from '../components/ProductCard';
@@ -290,11 +292,25 @@ const Products = () => {
             ))}
           </div>
         ) : filteredProducts.length > 0 ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {filteredProducts.map((product) => (
-              <ProductCard key={product._id} product={product} />
-            ))}
-          </div>
+          <AnimatePresence>
+            <motion.div
+              layout
+              className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
+            >
+              {filteredProducts.map((product) => (
+                <motion.div
+                  key={product._id}
+                  layout
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -30 }}
+                  transition={{ duration: 0.3, ease: "easeInOut" }}
+                >
+                  <ProductCard product={product} />
+                </motion.div>
+              ))}
+            </motion.div>
+          </AnimatePresence>
         ) : (
           <div className="text-center py-12">
             <p className="text-lg sm:text-xl text-gray-600">No products found matching your criteria.</p>

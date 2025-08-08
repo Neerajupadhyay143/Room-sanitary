@@ -3,10 +3,13 @@ import { client, getImageUrl } from '../lib/sanity';
 import { Skeleton } from '@mui/material';
 import MediaS1 from "../assets/MediaSection/MediaS1.jpg";
 import MediaTake1 from "../assets/MediaSection/MediaTake1.mp4"
+import { Link } from 'react-router-dom';
 
-const MediaSection = () => {
+const MediaSection = ({ onWatchVideoClick }) => {
   const [mediaContent, setMediaContent] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  console.log(onWatchVideoClick);
 
   useEffect(() => {
     const fetchMediaContent = async () => {
@@ -75,9 +78,11 @@ const MediaSection = () => {
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
               Our bathroom essentials are crafted with precision and built to last, ensuring your bathroom remains beautiful and functional for years to come.
             </p>
-            <button className="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
-              Learn More
-            </button>
+            <Link to="/about">
+              <button className="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
+                Learn More
+              </button>
+            </Link>
           </div>
           <div className="overflow-hidden rounded-lg shadow-lg group">
             <img
@@ -109,7 +114,9 @@ const MediaSection = () => {
             <p className="text-base sm:text-lg text-gray-600 leading-relaxed">
               Watch how our products transform ordinary spaces into elegant retreats. Built with quality, designed for comfort.
             </p>
-            <button className="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
+            <button
+              onClick={onWatchVideoClick}
+              className="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4 sm:py-3 sm:px-6 rounded-lg transition-colors text-sm sm:text-base">
               Watch Video
             </button>
           </div>
