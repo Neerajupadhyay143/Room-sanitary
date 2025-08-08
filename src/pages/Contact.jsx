@@ -20,18 +20,15 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // Compose the mailto link
     const mailtoLink = `mailto:neerajkumarsharma013@gmail.com?subject=${encodeURIComponent(
       formData.subject
     )}&body=${encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\nMessage:\n${formData.message}`
     )}`;
 
-    // Open default mail client with filled data
-    window.location.href = mailtoLink;
-
-    console.log("mail here :", mailtoLink)
+    window.open(mailtoLink, '_blank');
   };
+
 
 
 
@@ -39,14 +36,12 @@ const Contact = () => {
     {
       icon: MapPin,
       title: 'Visit Our Showroom',
-      details: [`The Old Ferrari Garage, Rugby Road, Brandon, Coventry, CV8 3GH
-Unit H, Kelvin Road, Greenbridge Industrial Estate, Swindon, SN3 3JW
-Mirelo LTD UK and Wales Registration Number: 12840417`],
+      details: [` Unit H, Kelvin Road, Swindon, SN3 3JW   Mirelo LTD UK and Wales Registration Number: 12840417`],
     },
     {
       icon: Phone,
       title: 'Call Us',
-      details: ['1-800-BATHROOM', '(1-800-228-4766)'],
+      details: ['+44 7393 282490'],
     },
     {
       icon: Mail,

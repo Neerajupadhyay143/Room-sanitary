@@ -28,7 +28,7 @@ const BrochurePage = () => {
 
             {/* Brochure Items */}
             <div className="max-w-7xl mx-auto px-4 py-12">
-                <div className="grid gap-10 justify-center items-center md:grid-cols-3">
+                <div className="grid gap-10 justify-center items-center md:grid-cols-1 lg:grid-cols-3">
                     {brochureItems.map((item, index) => (
                         <div
                             key={index}

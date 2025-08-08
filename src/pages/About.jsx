@@ -1,12 +1,13 @@
 import React from 'react';
 import { Award, Users, Wrench, Star } from 'lucide-react';
+import aboutus from "../assets/Products/About.png"
 
 const About = () => {
   const stats = [
-    { icon: Award, label: 'Years of Experience', value: '30+' },
-    { icon: Users, label: 'Happy Customers', value: '50K+' },
-    { icon: Wrench, label: 'Products Installed', value: '100K+' },
-    { icon: Star, label: 'Customer Rating', value: '4.9/5' },
+    { icon: Award, label: 'Years of Experience', value: '10+' },
+    { icon: Users, label: 'Happy Customers', value: '20K+' },
+    { icon: Wrench, label: 'Products', value: '10+' },
+    { icon: Star, label: 'Customer Rating', value: '4.3/5' },
   ];
 
   const team = [
@@ -50,8 +51,8 @@ const About = () => {
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
             {stats.map((stat, index) => (
               <div key={index} className="text-center">
-                <div className="bg-blue-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <stat.icon className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+                <div className="bg-gray-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <stat.icon className="h-6 w-6 sm:h-8 sm:w-8 text-gray-600" />
                 </div>
                 <div className="text-2xl sm:text-3xl font-bold text-gray-900 mb-2">{stat.value}</div>
                 <div className="text-sm sm:text-base text-gray-600">{stat.label}</div>
@@ -64,29 +65,32 @@ const About = () => {
       {/* Story Section */}
       <div className="py-12 sm:py-16 bg-gray-50">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-start">
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">Our Story</h2>
               <p className="text-base sm:text-lg text-gray-600 mb-6">
-                Founded in 1995 by a team of passionate designers and engineers, Bathroom Essentials
-                started with a simple mission: to make beautiful, functional bathroom fixtures
-                accessible to everyone.
+                Functional, stylish and enforced with Guarantees. Our Products will help you create the dream bathroom you are looking for. Our
+                vast range of PVC Furniture, Close Coupled Toilets, Back to Wall Toilets, Wall Hung Toilets, Bidet Toilets, Wall Hung Frames, Basin
+                Mixers, Douche's, Wetroom Drains, LED Mirrors and Accessories have exactly what you're looking for to create the perfect
+                relaxing sanctuary in which to start or finish your day.
+
               </p>
               <p className="text-base sm:text-lg text-gray-600 mb-6">
-                Over the years, we've grown from a small family business to a trusted name in
-                bathroom design, but our commitment to quality and customer satisfaction remains
-                unchanged.
+                We pride ourselves in our quality of products and cutting edge luxury designs. Our PVC Furniture comes with a 10 Year
+                Guarantee and 5 Years for Sanitaryware. All our products are CE Approved and Certified. Our products are manufactured to the
+                highest quality and subjected to rigorous testing and quality control in compliance with ISO Certificated standards. All of our
+                products perform to the highest of standards to enhance your everyday bathroom experience coupled with our continuous
+                customer after sales support services. Our experienced team will strive to source you the best quality products made from the
+                best material serving you day after day believing that our customers deserve only the best
+
               </p>
-              <p className="text-base sm:text-lg text-gray-600">
-                Today, we continue to innovate and push the boundaries of bathroom design,
-                always keeping our customers' needs at the heart of everything we do.
-              </p>
+
             </div>
             <div>
               <img
-                src="https://images.pexels.com/photos/1910472/pexels-photo-1910472.jpeg?auto=compress&cs=tinysrgb&w=800"
-                alt="Modern bathroom"
-                className="w-full h-64 sm:h-80 object-cover rounded-lg shadow-lg"
+                src={aboutus}
+                alt="Mirelo bathroom"
+                className="w-full h-64 sm:h-auto object-cover rounded-lg shadow-lg"
               />
             </div>
           </div>
@@ -129,8 +133,8 @@ const About = () => {
 
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
             <div className="text-center p-6">
-              <div className="bg-blue-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Award className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+              <div className="bg-gray-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Award className="h-6 w-6 sm:h-8 sm:w-8 text-gray-600" />
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Quality First</h3>
               <p className="text-sm sm:text-base text-gray-600">
@@ -140,8 +144,8 @@ const About = () => {
             </div>
 
             <div className="text-center p-6">
-              <div className="bg-blue-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Users className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+              <div className="bg-gray-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Users className="h-6 w-6 sm:h-8 sm:w-8 text-gray-600" />
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Customer Focus</h3>
               <p className="text-sm sm:text-base text-gray-600">
@@ -151,8 +155,8 @@ const About = () => {
             </div>
 
             <div className="text-center p-6 sm:col-span-2 lg:col-span-1">
-              <div className="bg-blue-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-4">
-                <Wrench className="h-6 w-6 sm:h-8 sm:w-8 text-blue-600" />
+              <div className="bg-gray-100 w-12 h-12 sm:w-16 sm:h-16 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Wrench className="h-6 w-6 sm:h-8 sm:w-8 text-gray-600" />
               </div>
               <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-4">Innovation</h3>
               <p className="text-sm sm:text-base text-gray-600">

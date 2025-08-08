@@ -16,7 +16,21 @@ const Products = () => {
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchParams] = useSearchParams();
 
-  const categories = ['all', 'shower', 'vanity', 'mirror', 'toilet', 'accessories', 'furniture'];
+  const categories = [
+    'all',
+    'furniture',
+    'sanitaryware',
+    'worktops',
+    'concealed-showers',
+    'brassware',
+    'cisterns',
+    'waste-accessories',
+    'led-mirrors',
+    'bath-panels'
+
+  ];
+
+
 
   const demoProducts = [
     {
@@ -119,123 +133,40 @@ const Products = () => {
       price: 259.99,
       category: 'storage',
     },
-    {
-      _id: '11',
-      name: 'LED Shower Panel',
-      slug: { current: 'led-shower-panel' },
-      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
-      shortDescription: 'Shower panel with LED lights and multiple jets.',
-      description: 'Full description here...',
-      price: 599.99,
-      category: 'shower',
-    },
-    {
-      _id: '12',
-      name: 'Wall-Mounted Soap Dispenser',
-      slug: { current: 'soap-dispenser' },
-      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
-      shortDescription: 'Convenient soap dispenser for handwashing.',
-      description: 'Full description here...',
-      price: 29.99,
-      category: 'accessories',
-    },
-    {
-      _id: '13',
-      name: 'Bathroom Shelf Set',
-      slug: { current: 'bathroom-shelf-set' },
-      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
-      shortDescription: 'Set of 3 wooden shelves for bathroom storage.',
-      description: 'Full description here...',
-      price: 89.99,
-      category: 'storage',
-    },
-    {
-      _id: '14',
-      name: 'Frameless Glass Shower Enclosure',
-      slug: { current: 'glass-shower-enclosure' },
-      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
-      shortDescription: 'Minimalistic frameless glass design.',
-      description: 'Full description here...',
-      price: 1099.99,
-      category: 'shower',
-    },
-    {
-      _id: '15',
-      name: 'Bathroom Faucet Set',
-      slug: { current: 'bathroom-faucet-set' },
-      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
-      shortDescription: 'Modern faucet set with chrome finish.',
-      description: 'Full description here...',
-      price: 199.99,
-      category: 'faucet',
-    },
-    {
-      _id: '16',
-      name: 'Compact Bathroom Heater',
-      slug: { current: 'bathroom-heater' },
-      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
-      shortDescription: 'Wall-mounted heater for quick warmth.',
-      description: 'Full description here...',
-      price: 149.99,
-      category: 'heater',
-    },
-    {
-      _id: '17',
-      name: 'Luxury Bath Towels Set',
-      slug: { current: 'bath-towels-set' },
-      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
-      shortDescription: 'Set of ultra-soft and absorbent towels.',
-      description: 'Full description here...',
-      price: 69.99,
-      category: 'towels',
-    },
-    {
-      _id: '18',
-      name: 'LED Vanity Light Bar',
-      slug: { current: 'led-vanity-light' },
-      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
-      shortDescription: 'Bright LED lighting bar for vanities.',
-      description: 'Full description here...',
-      price: 79.99,
-      category: 'lighting',
-    },
-    {
-      _id: '19',
-      name: 'Touchless Trash Can',
-      slug: { current: 'touchless-trash-can' },
-      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
-      shortDescription: 'Sensor-based trash bin for hygiene.',
-      description: 'Full description here...',
-      price: 99.99,
-      category: 'accessories',
-    },
-    {
-      _id: '20',
-      name: 'Scented Bathroom Diffuser',
-      slug: { current: 'bathroom-diffuser' },
-      image: { asset: { _ref: 'https://via.placeholder.com/300x200?text=No+Image' } },
-      shortDescription: 'Keep your bathroom fresh and aromatic.',
-      description: 'Full description here...',
-      price: 39.99,
-      category: 'fragrance',
-    },
+
   ];
   useEffect(() => {
     const fetchProducts = async () => {
       try {
         const query = `*[_type == "product"] {
   _id,
-  name,
+  title,
   slug,
   image,
-  shortDescription,
   description,
-  price {
+  category,
+  guarantee,
+  installationType,
+  material,
+  flushType,
+  waterproof, 
+  pricing {
     unitPrice,
     basinPrice,
-    combinedPrice
+    combinedPrice,
+    flushPlatePrice
   },
-  category
+  variants[] {
+    color,
+    dimension,
+    material,
+    productCode,
+    price
+  },
+  specifications[] {
+    label,
+    value
+  }
 }`;
 
 
@@ -269,10 +200,17 @@ const Products = () => {
 
   useEffect(() => {
     const searchParam = searchParams.get('search');
+    const categoryParam = searchParams.get('category');
+
     if (searchParam) {
       setSearchQuery(searchParam);
     }
+
+    if (categoryParam) {
+      setSelectedCategory(categoryParam.toLowerCase());
+    }
   }, [searchParams]);
+
 
   useEffect(() => {
     let filtered = products;
@@ -304,7 +242,7 @@ const Products = () => {
               Our Products
             </h1>
             <p className="text-lg sm:text-xl max-w-2xl mx-auto">
-              Discover our complete collection of premium bathroom essentials
+              Discover our complete collection of premium MIRELO BATHROOMS
             </p>
           </div>
         </div>
