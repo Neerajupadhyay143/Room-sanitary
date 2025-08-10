@@ -13,6 +13,7 @@ import Banner4 from "../assets/Banner/Banner4.jpg";
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { Link } from 'react-router-dom';
 
 const fallbackImages = [
   { id: 'local-1', title: 'Elegant Bathroom Designs', image: Banner1 },
@@ -113,13 +114,15 @@ const Banner = () => {
                   >
                     Transform Your Bathroom Experience
                   </motion.p>
-                  <motion.button
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 0.95 }}
-                    className="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4 sm:py-3 sm:px-8 rounded-lg transition-colors text-sm sm:text-base"
-                  >
-                    Explore Products
-                  </motion.button>
+                  <Link to="/products">
+                    <motion.button
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      className="bg-gray-700 hover:bg-gray-500 text-white font-bold py-2 px-4 sm:py-3 sm:px-8 rounded-lg transition-colors text-sm sm:text-base"
+                    >
+                      Explore Products
+                    </motion.button>
+                  </Link>
                 </motion.div>
               </div>
             </div>
