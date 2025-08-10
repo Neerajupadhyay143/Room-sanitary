@@ -88,21 +88,28 @@ const Products = () => {
   useEffect(() => {
     let filtered = products;
 
+    // Category filter
     if (selectedCategory !== 'all') {
       filtered = filtered.filter(product =>
         product.category?.toLowerCase() === selectedCategory
       );
     }
+
+    // Search filter
     if (searchQuery) {
+      const searchLower = searchQuery.toLowerCase();
       filtered = filtered.filter(product =>
-        product.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        product.shortDescription?.toLowerCase().includes(searchQuery.toLowerCase())
+        product.name?.toLowerCase().includes(searchLower) || // For demo products
+        product.title?.toLowerCase().includes(searchLower) || // For sanity products
+        product.shortDescription?.toLowerCase().includes(searchLower) ||
+        product.description?.toLowerCase().includes(searchLower)
       );
     }
 
     setFilteredProducts(filtered);
-    setCurrentPage(1); // reset to page 1 on filter change
+    setCurrentPage(1); // Reset page
   }, [products, selectedCategory, searchQuery]);
+
 
   // Pagination logic
   const indexOfLast = currentPage * productsPerPage;

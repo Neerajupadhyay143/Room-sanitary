@@ -40,7 +40,7 @@ const Banner = () => {
         setBannerImages(images);
       } catch (error) {
         console.error('Error fetching banner images:', error);
-        setBannerImages([]); // fallback
+        setBannerImages([]); 
       } finally {
         setLoading(false);
       }

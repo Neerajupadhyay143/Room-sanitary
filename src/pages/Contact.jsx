@@ -17,6 +17,7 @@ const Contact = () => {
     });
   };
 
+
   const handleSubmit = (e) => {
     e.preventDefault();
 
@@ -26,10 +27,9 @@ const Contact = () => {
       `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\nMessage:\n${formData.message}`
     )}`;
 
-    window.open(mailtoLink, '_blank');
+    // Desktop & Mobile friendly — no popup blocker issue
+    window.location.href = mailtoLink;
   };
-
-
 
 
   const contactInfo = [
