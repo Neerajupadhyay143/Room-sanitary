@@ -52,11 +52,11 @@ const Footer = () => {
           <h3 className="font-semibold mb-4 text-white">Company</h3>
           <ul className="space-y-3 text-sm text-gray-300">
             <li><Link to="/about">About us</Link></li>
-            <li><Link to="/exports">Exports</Link></li>
+            {/* <li><Link to="/exports">Exports</Link></li>
             <li><Link to="/certifications">Certifications</Link></li>
             <li><Link to="/media">Media</Link></li>
             <li><Link to="/careers">Careers</Link></li>
-            <li><Link to="/wwr">Who we are</Link></li>
+            <li><Link to="/wwr">Who we are</Link></li> */}
           </ul>
         </div>
 
@@ -64,7 +64,7 @@ const Footer = () => {
         <div>
           <h3 className="font-semibold mb-4 text-white">Useful Links</h3>
           <ul className="space-y-3 text-sm text-gray-300">
-            <li><Link to="/blogs">Blog</Link></li>
+            {/* <li><Link to="/blogs">Blog</Link></li> */}
             <li><Link to="/privacyp">Privacy Policy</Link></li>
             <li><Link to="/t&c">Terms & Conditions</Link></li>
           </ul>

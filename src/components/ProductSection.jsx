@@ -13,21 +13,41 @@ const ProductSection = () => {
     const fetchProducts = async () => {
       try {
         const query = `*[_type == "product"]{
-          _id,
-          name,
-          slug,
-          image,
-          shortDescription,
-          description,
-          price,
-          category
-        }`;
+           _id,
+           title,
+           slug,
+           image,
+           description,
+           category,
+           guarantee,
+           installationType,
+           material,
+           flushType,
+           waterproof, 
+           pricing {
+             unitPrice,
+             basinPrice,
+             combinedPrice,
+             flushPlatePrice
+           },
+           variants[] {
+             color,
+             dimension,
+             material,
+             productCode,
+             price
+           },
+           specifications[] {
+             label,
+             value
+           }
+         }`;
         const result = await client.fetch(query);
         setProducts(result);
       } catch (error) {
         console.error("Error fetching products from Sanity:", error);
 
-    
+
         const demoProducts = [
           {
             _id: '1',
@@ -79,7 +99,7 @@ const ProductSection = () => {
       <h2 className="text-3xl font-bold mb-8 text-center">Our Products</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {products.slice(0 ,3).map((product) => (
+        {products.slice(0, 3).map((product) => (
           <ProductCard key={product._id} product={product} />
         ))}
       </div>

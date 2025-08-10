@@ -19,12 +19,13 @@ const Home = () => {
       <Banner />
       <MediaSection onWatchVideoClick={scrollToVideoGallery} />
       <ProductSection />
-      <FAQSection />
-
-
       <div ref={videoGalleryRef}>
         <VideoGallery />
       </div>
+      <FAQSection />
+
+
+
     </div>
   );
 };

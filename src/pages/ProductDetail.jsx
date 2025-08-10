@@ -191,7 +191,7 @@ const ProductDetail = () => {
               </h1>
 
               {/* Slug */}
-              <p className="text-sm text-gray-500">Slug: {product.slug?.current}</p>
+              <p className="text-sm text-gray-500 font-semibold">Slug: {product.slug?.current}</p>
 
               {/* Pricing Section */}
               {product.pricing && (
@@ -206,9 +206,9 @@ const ProductDetail = () => {
               {/* Info Grid */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-4 gap-y-2 text-sm text-gray-700 mt-4">
                 {product.material && <p><strong>Material:</strong> {product.material}</p>}
-                {product.guarantee && <p><strong>Guarantee:</strong> {product.guarantee} years</p>}
+                {product.guarantee && <p ><strong>Guarantee:</strong> <span className='font-semibold'>{product.guarantee}</span></p>}
                 {product.flushType && <p><strong>Flush Type:</strong> {product.flushType}</p>}
-                {product.installationType && <p><strong>Installation Type:</strong> {product.installationType}</p>}
+                {product.installationType && <p><strong>Installation Type :</strong> {product.installationType}</p>}
                 {product.waterproof && <p className="text-green-600 font-medium">✔ 100% Waterproof</p>}
               </div>
 
@@ -216,7 +216,7 @@ const ProductDetail = () => {
               {product.description && (
                 <div className="pt-4">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Description</h3>
-                  <p className="text-sm text-gray-700 leading-relaxed">{product.description}</p>
+                  <p className="text-sm text-gray-700 leading-relaxed font-semibold">{product.description}</p>
                 </div>
               )}
             </div>
@@ -311,17 +311,22 @@ const ProductDetail = () => {
                       alt={item.title}
                       className="w-full h-48 object-contain"
                     />
-                    <div className="p-4 bg-gray-100">
+                    <div className="p-4 bg-gray-100 flex flex-col h-full">
                       <h3 className="text-lg font-semibold text-gray-900">{item.title}</h3>
+
                       {item.shortDescription && (
-                        <p className="text-sm text-gray-600 mt-1 line-clamp-2">{item.shortDescription}</p>
+                        <p className="text-sm text-gray-600 mt-1 line-clamp-2">
+                          {item.shortDescription}
+                        </p>
                       )}
+
                       {price != null && (
-                        <p className="text-base font-bold text-gray-700 mt-2">
+                        <p className="text-base font-bold text-gray-700 mt-auto">
                           £{price.toFixed(2)}
                         </p>
                       )}
                     </div>
+
                   </Link>
                 );
               })}
