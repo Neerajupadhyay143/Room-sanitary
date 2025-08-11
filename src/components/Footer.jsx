@@ -12,7 +12,7 @@ import {
 import { Link } from 'react-router-dom';
 
 const Footer = () => {
-  
+
   return (
     <footer className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white shadow-[0_-4px_10px_rgba(0,0,0,0.15)]">
       <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
@@ -43,7 +43,18 @@ const Footer = () => {
             <li className="flex items-center space-x-2"><Twitter className="h-4 w-4" /><span>Twitter</span></li>
             <li className="flex items-center space-x-2"><Linkedin className="h-4 w-4" /><span>LinkedIn</span></li>
             <li className="flex items-center space-x-2"><Youtube className="h-4 w-4" /><span>YouTube</span></li>
-            <li className="flex items-center space-x-2"><MessageCircle className="h-4 w-4" /><span>Whatsapp</span></li>
+            <li className="flex items-center space-x-2">
+              <a
+                href="https://wa.me/447393282490"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="flex items-center space-x-2 hover:text-green-400 transition-colors"
+              >
+                <MessageCircle className="h-4 w-4" />
+                <span>Whatsapp</span>
+              </a>
+            </li>
+
           </ul>
         </div>
 
