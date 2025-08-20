@@ -110,8 +110,6 @@ const Footer = () => {
             className="hover:text-blue-400 transition-colors underline"
           >
             Unit H, Kelvin Road, Swindon, SN3 3JW
-
-
           </a>
         </p>
 

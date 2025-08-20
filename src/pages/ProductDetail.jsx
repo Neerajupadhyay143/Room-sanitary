@@ -177,7 +177,7 @@ const ProductDetail = () => {
             </div>
 
             {/* Details */}
-            <div className="lg:w-1/2 p-6 sm:p-8 space-y-4">
+            <div className="lg:w-1/2 p-6 sm:p-8 space-y-4 ">
               {/* Category Tag */}
               {product.category && (
                 <span className="inline-block bg-blue-100 text-blue-800 text-xs sm:text-sm px-3 py-1 rounded-full">
@@ -214,9 +214,9 @@ const ProductDetail = () => {
 
               {/* Description */}
               {product.description && (
-                <div className="pt-4">
+                <div className="pt-4 ">
                   <h3 className="text-lg font-semibold text-gray-900 mb-2">Description</h3>
-                  <p className="text-sm text-gray-700 leading-relaxed font-semibold">{product.description}</p>
+                  <p className="text-sm text-gray-700 leading-relaxed font-semibold overflow-scroll h-64 overflow-x-hidden">{product.description}</p>
                 </div>
               )}
             </div>

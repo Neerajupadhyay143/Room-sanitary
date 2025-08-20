@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { client } from '../lib/sanity';
 import ProductCard from './ProductCard';
+import Skeleton from '@mui/material/Skeleton';
+import Box from '@mui/material/Box';
 import s from "../assets/Products/s.jpg";
 import s2 from "../assets/Products/s2.jpg";
 import s3 from "../assets/Products/s3.jpeg";
@@ -47,7 +49,6 @@ const ProductSection = () => {
       } catch (error) {
         console.error("Error fetching products from Sanity:", error);
 
-
         const demoProducts = [
           {
             _id: '1',
@@ -90,18 +91,23 @@ const ProductSection = () => {
     fetchProducts();
   }, []);
 
-  if (loading) {
-    return <div className="text-center py-10">Loading...</div>;
-  }
-
   return (
     <section className="py-12 px-4 md:px-12">
       <h2 className="text-3xl font-bold mb-8 text-center">Our Products</h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {products.slice(0, 3).map((product) => (
-          <ProductCard key={product._id} product={product} />
-        ))}
+        {loading
+          ? Array.from(new Array(3)).map((_, index) => (
+            <Box key={index} className="rounded-lg overflow-hidden shadow-md p-4">
+              <Skeleton variant="rectangular" height={180} className="rounded-md" />
+              <Skeleton variant="text" height={30} width="80%" sx={{ mt: 2 }} />
+              <Skeleton variant="text" height={20} width="60%" />
+              <Skeleton variant="text" height={20} width="40%" />
+            </Box>
+          ))
+          : products.slice(0, 3).map((product) => (
+            <ProductCard key={product._id} product={product} />
+          ))}
       </div>
     </section>
   );
