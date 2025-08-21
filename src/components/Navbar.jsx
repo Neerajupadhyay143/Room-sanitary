@@ -17,6 +17,7 @@ import Waste_Accessories from "../assets/Products/Waste_Accessories.jpg"
 
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMegaOpen, setIsMegaOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const navigate = useNavigate();
 
@@ -34,6 +35,7 @@ const Navbar = () => {
   const handleMobileLinkClick = () => {
     setIsMenuOpen(false);
   };
+  let hideTimeout = null;
 
   return (
     <nav className=" bg-white shadow-lg border-b border-gray-200 sticky top-0 z-50">
@@ -58,79 +60,104 @@ const Navbar = () => {
               About
             </Link>
 
-            <div className=" group">
+            <div
+              onMouseEnter={() => {
+                if (hideTimeout) clearTimeout(hideTimeout);
+                setIsMegaOpen(true);
+              }}
+              onMouseLeave={() => {
+                hideTimeout = setTimeout(() => setIsMegaOpen(false), 300); // 300ms delay
+              }}
+              className="group">
               <Link to="/products" className="text-gray-700 hover:text-gray-500 transition-colors font-medium">
                 Products
               </Link>
               {/* Mega Menu */}
-              <div className="absolute left-0 top-full w-full bg-white py-10 px-8 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
-                  {/* Furniture */}
-                  <Link to="/products?category=furniture" className="group relative block overflow-hidden rounded-md shadow-sm">
-                    <img src={Furniture} alt="Furniture" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
-                    <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <span className="font-semibold">Furniture</span>
-                    </div>
-                  </Link>
+              {isMegaOpen &&
+                <div className="absolute left-0 top-full w-full bg-white py-10  px-8 shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                  <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6">
+                    {/* Furniture */}
+                    <Link
+                      onClick={() => setIsMegaOpen(false)}
+                      to="/products?category=furniture" className="group relative block overflow-hidden rounded-md shadow-sm">
+                      <img src={Furniture} alt="Furniture" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
+                      <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <span className="font-semibold">Furniture</span>
+                      </div>
+                    </Link>
 
-                  {/* Sanitaryware */}
-                  <Link to="/products?category=sanitaryware" className="group relative block overflow-hidden rounded-md shadow-sm">
-                    <img src={sanatry} alt="Sanitaryware" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
-                    <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <span className="font-semibold">Sanitaryware</span>
-                    </div>
-                  </Link>
+                    {/* Sanitaryware */}
+                    <Link
+                      onClick={() => setIsMegaOpen(false)}
+                      to="/products?category=sanitaryware" className="group relative block overflow-hidden rounded-md shadow-sm">
+                      <img src={sanatry} alt="Sanitaryware" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
+                      <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <span className="font-semibold">Sanitaryware</span>
+                      </div>
+                    </Link>
 
-                  {/* Worktops */}
-                  <Link to="/products?category=worktops" className="group relative block overflow-hidden rounded-md shadow-sm">
-                    <img src={workspace} alt="Worktops" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
-                    <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <span className="font-semibold">worktops
-                      </span>
-                    </div>
-                  </Link>
+                    {/* Worktops */}
+                    <Link
+                      onClick={() => setIsMegaOpen(false)}
+                      to="/products?category=worktops" className="group relative block overflow-hidden rounded-md shadow-sm">
+                      <img src={workspace} alt="Worktops" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
+                      <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <span className="font-semibold">worktops
+                        </span>
+                      </div>
+                    </Link>
 
-                  {/* Concealed Showers */}
-                  <Link to="/products?category=concealed-showers" className="group relative block overflow-hidden rounded-md shadow-sm">
-                    <img src={CONCEALED_SHOWERS} alt="Concealed Showers" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
-                    <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <span className="font-semibold">Concealed Showers</span>
-                    </div>
-                  </Link>
+                    {/* Concealed Showers */}
+                    <Link
+                      onClick={() => setIsMegaOpen(false)}
+                      to="/products?category=concealed-showers" className="group relative block overflow-hidden rounded-md shadow-sm">
+                      <img src={CONCEALED_SHOWERS} alt="Concealed Showers" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
+                      <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <span className="font-semibold">Concealed Showers</span>
+                      </div>
+                    </Link>
 
-                  {/* Brassware */}
-                  <Link to="/products?category=brassware" className="group relative block overflow-hidden rounded-md shadow-sm">
-                    <img src={Brassware} alt="Brassware" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
-                    <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <span className="font-semibold">Brassware</span>
-                    </div>
-                  </Link>
+                    {/* Brassware */}
+                    <Link
+                      onClick={() => setIsMegaOpen(false)}
+                      to="/products?category=brassware" className="group relative block overflow-hidden rounded-md shadow-sm">
+                      <img src={Brassware} alt="Brassware" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
+                      <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <span className="font-semibold">Brassware</span>
+                      </div>
+                    </Link>
 
-                  {/* Cisterns */}
-                  <Link to="/products?category=cisterns" className="group relative block overflow-hidden rounded-md shadow-sm">
-                    <img src={CISTERNS} alt="Cisterns" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
-                    <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <span className="font-semibold">Cisterns</span>
-                    </div>
-                  </Link>
+                    {/* Cisterns */}
+                    <Link
+                      onClick={() => setIsMegaOpen(false)}
+                      to="/products?category=cisterns" className="group relative block overflow-hidden rounded-md shadow-sm">
+                      <img src={CISTERNS} alt="Cisterns" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
+                      <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <span className="font-semibold">Cisterns</span>
+                      </div>
+                    </Link>
 
-                  {/* Waste & Accessories */}
-                  <Link to="/products?category=waste-accessories" className="group relative block overflow-hidden rounded-md shadow-sm">
-                    <img src={Waste_Accessories} alt="Waste & Accessories" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
-                    <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <span className="font-semibold">Waste & Accessories</span>
-                    </div>
-                  </Link>
+                    {/* Waste & Accessories */}
+                    <Link
+                      onClick={() => setIsMegaOpen(false)}
+                      to="/products?category=waste-accessories" className="group relative block overflow-hidden rounded-md shadow-sm">
+                      <img src={Waste_Accessories} alt="Waste & Accessories" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
+                      <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <span className="font-semibold">Waste & Accessories</span>
+                      </div>
+                    </Link>
 
-                  {/* LED Mirrors */}
-                  <Link to="/products?category=led-mirrors" className="group relative block overflow-hidden rounded-md shadow-sm">
-                    <img src={LED} alt="LED Mirrors" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
-                    <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
-                      <span className="font-semibold">LED Mirrors</span>
-                    </div>
-                  </Link>
-                </div>
-              </div>
+                    {/* LED Mirrors */}
+                    <Link
+                      onClick={() => setIsMegaOpen(false)}
+                      to="/products?category=led-mirrors" className="group relative block overflow-hidden rounded-md shadow-sm">
+                      <img src={LED} alt="LED Mirrors" className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110" />
+                      <div className="absolute bottom-0 left-0 w-full bg-white/30 backdrop-blur-sm text-black py-2 text-center opacity-0 group-hover:opacity-100 transition-all duration-300">
+                        <span className="font-semibold">LED Mirrors</span>
+                      </div>
+                    </Link>
+                  </div>
+                </div>}
 
             </div>
 
@@ -201,8 +228,8 @@ const Navbar = () => {
                 className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
                 Home
               </Link>
-              <Link 
-              onClick={handleMobileLinkClick} to="/about" className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
+              <Link
+                onClick={handleMobileLinkClick} to="/about" className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
                 About
               </Link>
               <Link
