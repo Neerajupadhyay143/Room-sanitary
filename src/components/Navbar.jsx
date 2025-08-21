@@ -201,7 +201,8 @@ const Navbar = () => {
                 className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
                 Home
               </Link>
-              <Link to="/about" className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
+              <Link 
+              onClick={handleMobileLinkClick} to="/about" className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
                 About
               </Link>
               <Link
