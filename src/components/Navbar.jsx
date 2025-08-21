@@ -14,6 +14,7 @@ import Brassware from "../assets/Products/Brassware.png"
 import CISTERNS from "../assets/Products/CISTERNS.jpg"
 import LED from "../assets/Products/LED.jpg"
 import Waste_Accessories from "../assets/Products/Waste_Accessories.jpg"
+
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
@@ -30,6 +31,9 @@ const Navbar = () => {
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
   };
+  const handleMobileLinkClick = () => {
+    setIsMenuOpen(false);
+  };
 
   return (
     <nav className=" bg-white shadow-lg border-b border-gray-200 sticky top-0 z-50">
@@ -45,10 +49,9 @@ const Navbar = () => {
 
           </Link>
 
-
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-4 lg:space-x-6 xl:space-x-8">
-            <Link to="/" className="hidden lg:inline-flex text-gray-700 hover:text-gray-500 transition-colors font-medium">
+            <Link to="/" className=" lg:inline-flex text-gray-700 hover:text-gray-500 transition-colors font-medium">
               Home
             </Link>
             <Link to="/about" className="text-gray-700 hover:text-gray-500 transition-colors font-medium">
@@ -148,10 +151,11 @@ const Navbar = () => {
                 placeholder="Search..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent w-48 lg:w-48"
+                className="pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-gray-500 focus:border-transparent w-32 md:w-40 lg:w-48"
               />
               <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
             </form>
+
 
             <div className="flex items-center space-x-2 text-gray-700">
               <Phone className="h-4 w-4 lg:h-5 lg:w-5" />
@@ -163,15 +167,15 @@ const Navbar = () => {
             </div>
 
             <div className="flex items-center space-x-1 lg:space-x-2">
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
+              <a href="https://www.facebook.com/mirelobathrooms/" target="_blank" rel="noopener noreferrer"
                 className="text-gray-600 hover:text-blue-600 transition-colors p-1">
                 <FacebookIcon fontSize="small" />
               </a>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+              <a href="https://www.instagram.com/mirelobathrooms/" target="_blank" rel="noopener noreferrer"
                 className="text-gray-600 hover:text-pink-600 transition-colors p-1">
                 <InstagramIcon fontSize="small" />
               </a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+              <a href="https://www.linkedin.com/in/mirelobathrooms/" target="_blank" rel="noopener noreferrer"
                 className="text-gray-600 hover:text-blue-700 transition-colors p-1">
                 <LinkedInIcon fontSize="small" />
               </a>
@@ -191,19 +195,25 @@ const Navbar = () => {
         {isMenuOpen && (
           <div className="md:hidden py-4 border-t border-gray-200 bg-white">
             <div className="flex flex-col space-y-4">
-              <Link to="/" className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
+              <Link
+                onClick={handleMobileLinkClick}
+                to="/"
+                className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
                 Home
               </Link>
               <Link to="/about" className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
                 About
               </Link>
-              <Link to="/products" className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
+              <Link
+                onClick={handleMobileLinkClick}
+                to="/products" className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
                 Products
               </Link>
-              <Link to="/Brochure" className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
+              <Link
+                onClick={handleMobileLinkClick} to="/Brochure" className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
                 Brochure
               </Link>
-              <Link to="/contact" className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
+              <Link onClick={handleMobileLinkClick} to="/contact" className="text-gray-700 hover:text-gray-500 transition-colors font-medium px-4 py-2">
                 Contact
               </Link>
 
@@ -229,15 +239,15 @@ const Navbar = () => {
                 </div>
 
                 <div className="flex items-center space-x-4">
-                  <a href="https://facebook.com" target="_blank" rel="noopener noreferrer"
+                  <a href="https://www.facebook.com/mirelobathrooms/" target="_blank" rel="noopener noreferrer"
                     className="text-gray-700 hover:text-gray-500 transition-colors">
                     <FacebookIcon />
                   </a>
-                  <a href="https://instagram.com" target="_blank" rel="noopener noreferrer"
+                  <a href="https://www.instagram.com/mirelobathrooms/" target="_blank" rel="noopener noreferrer"
                     className="text-gray-700 hover:text-pink-600 transition-colors">
                     <InstagramIcon />
                   </a>
-                  <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer"
+                  <a href="https://www.linkedin.com/in/mirelobathrooms" target="_blank" rel="noopener noreferrer"
                     className="text-gray-700 hover:text-gray-500 transition-colors">
                     <LinkedInIcon />
                   </a>
