@@ -33,11 +33,11 @@ const Contact = () => {
 
 
   const contactInfo = [
-    {
-      icon: MapPin,
-      title: 'Visit Our Showroom',
-      details: [` Unit H, Kelvin Road, Swindon, SN3 3JW   Mirelo LTD UK and Wales Registration Number: 12840417`],
-    },
+    // {
+    //   icon: MapPin,
+    //   title: 'Visit Our Showroom',
+    //   details: [` Unit H, Kelvin Road, Swindon, SN3 3JW   Mirelo LTD UK and Wales Registration Number: 12840417`],
+    // },
     {
       icon: Phone,
       title: 'Call Us',

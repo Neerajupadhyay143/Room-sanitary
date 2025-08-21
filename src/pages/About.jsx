@@ -69,7 +69,7 @@ const About = () => {
             <div>
               <h2 className="text-2xl sm:text-3xl font-bold text-gray-900 mb-6">About Us</h2>
               <p className="text-base sm:text-lg text-gray-600 mb-6">
-                Mirelo Bathrooms
+               
                 At Mirelo Bathrooms, we specialize in delivering premium, stylish, and functional bathroom solutions designed to elevate your space. From innovative fittings to elegant fixtures, our products are crafted with quality and durability in mind. Discover how Mirelo can transform your bathroom into a space of comfort and luxury.
 
               </p>

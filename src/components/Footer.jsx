@@ -19,9 +19,8 @@ const Footer = () => {
     { label: "Worktops", slug: "worktops", },
     { label: "Concealed Showers", slug: "concealed-showers", },
     { label: "Brassware", slug: "brassware", },
-    { label: "Cisterns", slug: "cisterns", },
-    { label: "Waste & Accessories", slug: "waste-accessories", },
-    { label: "LED Mirrors", slug: "led-mirrors", },
+
+
   ];
   return (
     <footer className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white shadow-[0_-4px_10px_rgba(0,0,0,0.15)]">
@@ -30,11 +29,11 @@ const Footer = () => {
         {/* Instagram Feed */}
         <div>
           <h3 className="font-semibold mb-4 text-white">Visit Our Instagram Feed</h3>
-          <div className="grid grid-cols-2 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-3   sm:grid-cols-2 gap-4">
             {[1, 2, 3, 4].map((_, index) => (
               <button
                 key={index}
-                className="w-full aspect-square flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-lg shadow transition"
+                className="w-full h-[80px] aspect-video flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-lg shadow transition"
               >
                 <svg fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6 text-white">
                   <path d="M10 17l6-5-6-5v10z" />
@@ -42,6 +41,7 @@ const Footer = () => {
               </button>
             ))}
           </div>
+
         </div>
 
         {/* Social Links */}
@@ -142,6 +142,7 @@ const Footer = () => {
                   to={`/products?category=${val.slug}`}>{val.label}</Link></li>
               </>
             ))}
+            <li> <Link to={'/products'}>See more...</Link></li>
           </ul>
         </div>
         {/* Useful Links */}
@@ -204,7 +205,7 @@ const Footer = () => {
       </div>
       <div className=" px-4 text-sm text-gray-100 text-center w-full space-y-2 mb-4">
         <p >
-          Made by <a href="http://techvedasoftware.com" target='_blank' rel="noopener noreferrer"> techvedasoftware.com</a>
+          <a href="http://techvedasoftware.com" target='_blank' rel="noopener noreferrer"> Designed & Developed by Techveda Software</a>
         </p>
       </div>
     </footer>
