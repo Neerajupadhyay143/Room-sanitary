@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Facebook,
   Instagram,
@@ -11,8 +11,32 @@ import {
 } from 'lucide-react';
 import CloseIcon from "@mui/icons-material/Close";
 import { Link } from 'react-router-dom';
+import { client } from "../lib/sanity.js";
+import imageUrlBuilder from "@sanity/image-url";
 
+const builder = imageUrlBuilder(client);
+function urlFor(source) {
+  return builder.image(source);
+}
 const Footer = () => {
+
+  const [reels, setReels] = useState([]);
+
+  useEffect(() => {
+    const fetchReels = async () => {
+      const query = `*[_type == "instaReel"] | order(createdAt desc)[0...4]{
+        _id,
+        title,
+        instaLink,
+        "videoUrl": video.asset->url,
+        "thumbnailUrl": thumbnail.asset->url
+      }`;
+      const data = await client.fetch(query);
+      setReels(data);
+    };
+    fetchReels();
+  }, []);
+
   const categories = [
     { label: "Furniture", slug: "furniture", },
     { label: "Sanitaryware", slug: "sanitaryware", },
@@ -30,16 +54,55 @@ const Footer = () => {
         <div>
           <h3 className="font-semibold mb-4 text-white">Visit Our Instagram Feed</h3>
           <div className="grid grid-cols-3   sm:grid-cols-2 gap-4">
-            {[1, 2, 3, 4].map((_, index) => (
-              <button
-                key={index}
-                className="w-full h-[80px] aspect-video flex items-center justify-center bg-gray-700 hover:bg-gray-600 rounded-lg shadow transition"
-              >
-                <svg fill="currentColor" viewBox="0 0 24 24" className="w-6 h-6 text-white">
-                  <path d="M10 17l6-5-6-5v10z" />
-                </svg>
-              </button>
-            ))}
+            {reels.length > 0 ? (
+              reels.map((reel) => (
+                <a
+                  key={reel._id}
+                  href={reel.instaLink || "#"}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="relative w-full h-[80px] bg-gray-700 rounded-lg overflow-hidden group"
+                >
+                  
+                  {/* Thumbnail or Video */}
+                  {reel.videoUrl || reel.instaLink ? (
+                    <video
+                      src={reel.videoUrl ? reel.videoUrl : reel.instaLink}
+                      muted
+                      loop
+                      autoPlay
+                      playsInline
+                      className="w-full h-[80px] object-cover group-hover:scale-105 transition-transform"
+                    />
+                  ) : reel.thumbnailUrl ? (
+                    <img
+                      src={reel.thumbnailUrl}
+                      alt={reel.title}
+                      className="w-full h-[80px] object-cover group-hover:scale-105 transition-transform"
+                    />
+                  ) : (
+                    <div className="flex items-center justify-center h-full text-gray-300">
+                      No Preview
+                    </div>
+                  )}
+
+
+                  {/* Overlay Play Icon */}
+                  <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      className="h-10 w-10 text-white"
+                      fill="currentColor"
+                      viewBox="0 0 24 24"
+                    >
+                      <path d="M10 17l6-5-6-5v10z" />
+                    </svg>
+                  </div>
+                </a>
+              ))
+            ) : (
+              <p className="text-gray-400 text-sm">No reels available</p>
+            )}
           </div>
 
         </div>
