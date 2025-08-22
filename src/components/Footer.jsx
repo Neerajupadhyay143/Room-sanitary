@@ -53,7 +53,7 @@ const Footer = () => {
         {/* Instagram Feed */}
         <div>
           <h3 className="font-semibold mb-4 text-white">Visit Our Instagram Feed</h3>
-          <div className="grid grid-cols-3   sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-2   sm:grid-cols-2 gap-4">
             {reels.length > 0 ? (
               reels.map((reel) => (
                 <a
