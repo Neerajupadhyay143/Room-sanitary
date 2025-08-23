@@ -2,6 +2,7 @@ import React, { Suspense, lazy } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import TermsAndCondition from './pages/TermsAndCondition.jsx';
 
 // 👇 Lazy load your page components
 const Home = lazy(() => import('./pages/Home'));
@@ -41,7 +42,7 @@ function App() {
                 path="/terms"
                 element={
                   <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-                    <h1 className="text-xl sm:text-2xl text-center">Terms & Conditions - Coming Soon</h1>
+                    <TermsAndCondition />
                   </div>
                 }
               />

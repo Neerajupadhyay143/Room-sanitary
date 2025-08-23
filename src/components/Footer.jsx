@@ -214,7 +214,7 @@ const Footer = () => {
           <ul className="space-y-3 text-sm text-gray-300">
             {/* <li><Link to="/blogs">Blog</Link></li> */}
             <li><Link to="/privacyp">Privacy Policy</Link></li>
-            <li><Link to="/t&c">Terms & Conditions</Link></li>
+            <li><Link to="/terms">Terms & Conditions</Link></li>
           </ul>
           {/* Company Links */}
           <div className='mt-5'>
