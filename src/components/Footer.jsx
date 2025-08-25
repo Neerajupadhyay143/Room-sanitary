@@ -48,7 +48,7 @@ const Footer = () => {
   ];
   return (
     <footer className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white shadow-[0_-4px_10px_rgba(0,0,0,0.15)]">
-      <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-8">
+      <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-3 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-8">
 
         {/* Instagram Feed */}
         {/* <div>
@@ -233,11 +233,11 @@ const Footer = () => {
         {/* Talk To Us + Contact Info */}
         <div>
           <h3 className="font-semibold mb-4 text-white">Talk To Us</h3>
-          <ul className="space-y-3 text-sm text-gray-300">
+          <ul className="space-y-3 text-sm text-gray-300 ">
             <li><Link to="/feedback">Feedback</Link></li>
             <li><Link to="/contact">Contact Us</Link></li>
-            <li className="flex items-center space-x-2">
-              <Phone className="h-4 w-4 font-bold" /><span>+44 7393 282490
+            <li className="flex items-center space-x-2 ">
+              <Phone className=" h-4 w-4 font-bold" /><span >+44 7393 282490
               </span>
             </li>
             <li className="flex items-center space-x-2">
