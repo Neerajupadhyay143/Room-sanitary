@@ -48,10 +48,10 @@ const Footer = () => {
   ];
   return (
     <footer className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 text-white shadow-[0_-4px_10px_rgba(0,0,0,0.15)]">
-      <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
+      <div className="max-w-7xl mx-auto px-4 py-12 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4  gap-8">
 
         {/* Instagram Feed */}
-        <div>
+        {/* <div>
           <h3 className="font-semibold mb-4 text-white">Visit Our Instagram Feed</h3>
           <div className="grid grid-cols-2   sm:grid-cols-2 gap-4">
             {reels.length > 0 ? (
@@ -63,8 +63,8 @@ const Footer = () => {
                   rel="noopener noreferrer"
                   className="relative w-full h-[80px] bg-gray-700 rounded-lg overflow-hidden group"
                 >
-                  
-                  {/* Thumbnail or Video */}
+
+
                   {reel.videoUrl || reel.instaLink ? (
                     <video
                       src={reel.videoUrl ? reel.videoUrl : reel.instaLink}
@@ -87,7 +87,7 @@ const Footer = () => {
                   )}
 
 
-                  {/* Overlay Play Icon */}
+
                   <div className="absolute inset-0 bg-black bg-opacity-30 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,7 @@ const Footer = () => {
             )}
           </div>
 
-        </div>
+        </div> */}
 
         {/* Social Links */}
         <div>

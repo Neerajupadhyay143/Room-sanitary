@@ -19,9 +19,9 @@ const Home = () => {
       <Banner />
       <MediaSection onWatchVideoClick={scrollToVideoGallery} />
       <ProductSection />
-      <div ref={videoGalleryRef}>
+      {/* <div ref={videoGalleryRef}>
         <VideoGallery />
-      </div>
+      </div> */}
       <FAQSection />
 
 

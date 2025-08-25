@@ -21,13 +21,16 @@ const ProductCard = ({ product }) => {
   const isBrassware = product?.category === 'brassware';
 
   return (
-    <div className="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full">
+    <Link
+      to={product?.slug?.current ? `/products/${product.slug.current}` : '#'}
+      className="group bg-white rounded-lg shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden flex flex-col h-full cursor-pointer"
+    >
       {/* Image */}
       <div className="relative overflow-hidden">
         <img
           src={imageUrl}
           alt={product?.title || 'Product image'}
-          className=" w-full h-60 object-contain  group-hover:scale-105 transition-transform duration-300"
+          className="w-full h-60 object-contain group-hover:scale-105 transition-transform duration-300"
         />
         <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-20 transition-all duration-300" />
       </div>
@@ -57,7 +60,7 @@ const ProductCard = ({ product }) => {
           </div>
         </div>
 
-        {/* All Variants Styled Like Screenshot */}
+        {/* All Variants */}
         {product?.variants?.length > 0 && (
           <div className="mt-3 space-y-1">
             {product.variants.map((variant, idx) => (
@@ -79,18 +82,15 @@ const ProductCard = ({ product }) => {
                     <span className="text-gray-500 font-semibold">{variant.material}</span>
                   )}
                 </div>
-                {
-                  variant.price != null && (
-                    <span className="font-semibold text-gray-700">| Price : £{variant.price.toFixed(2)}</span>
-                  )
-                }
+                {variant.price != null && (
+                  <span className="font-semibold text-gray-700">| Price : £{variant.price.toFixed(2)}</span>
+                )}
               </div>
             ))}
           </div>
         )}
 
         {/* Pricing */}
-        
         {hasPricing && (
           <div className="text-sm text-gray-800 leading-6">
             <div className="flex items-center justify-between gap-4">
@@ -134,23 +134,16 @@ const ProductCard = ({ product }) => {
           </div>
         )}
 
-        {/* Spacer to push View Details down */}
+        {/* Spacer */}
         <div className="flex-grow" />
 
-        {/* View Details */}
-        <div className='mt-3'>
-          {product?.slug?.current && (
-            <Link
-              to={`/products/${product.slug.current}`}
-              className="inline-flex items-center space-x-2 text-gray-700 hover:text-gray-500 font-medium transition-colors text-sm"
-            >
-              <span>View Details</span>
-              <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          )}
+        {/* View Details (Optional, for UX) */}
+        <div className='mt-3 flex items-center space-x-2 text-gray-700 font-medium text-sm'>
+          <span>View Details</span>
+          <ArrowRight className="h-4 w-4 group-hover:translate-x-1 transition-transform" />
         </div>
       </div>
-    </div >
+    </Link>
   );
 };
 
