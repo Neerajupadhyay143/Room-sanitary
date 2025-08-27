@@ -144,7 +144,7 @@ const ProductSection = () => {
       </div>
 
       {/* Featured Products Grid */}
-      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      {/* <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {loading
           ? Array.from(new Array(3)).map((_, index) => (
             <Box key={index} className="rounded-lg overflow-hidden shadow-md p-4">
@@ -166,7 +166,7 @@ const ProductSection = () => {
               }}
             />
           ))}
-      </div>
+      </div> */}
     </section>
   );
 };
