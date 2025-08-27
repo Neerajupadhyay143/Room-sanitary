@@ -6,8 +6,8 @@ const About = () => {
   const stats = [
     { icon: Award, label: 'Years of Experience', value: '10+' },
     { icon: Users, label: 'Happy Customers', value: '20K+' },
-    { icon: Wrench, label: 'Products', value: '10+' },
-    { icon: Star, label: 'Customer Rating', value: '4.3/5' },
+    { icon: Wrench, label: 'Products', value: '100+' },
+    { icon: Star, label: 'Customer Rating', value: '5/5' },
   ];
 
   const team = [
