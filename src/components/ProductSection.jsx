@@ -4,6 +4,7 @@ import ProductCard from "./ProductCard";
 import Skeleton from "@mui/material/Skeleton";
 import Box from "@mui/material/Box";
 import { Link } from "react-router-dom";
+import { getImageUrl } from "../lib/sanity"; // ✅ optimized image helper import
 
 // Category Images
 import Furniture from "../assets/Products/Furniture.png";
@@ -115,7 +116,6 @@ const ProductSection = () => {
       <h2 className="text-3xl font-bold mb-12 text-center">Our Products</h2>
 
       {/* Categories Grid */}
-      
       <div className="max-w-7xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 mb-16">
         {categories.map((cat) => (
           <Link
@@ -126,15 +126,16 @@ const ProductSection = () => {
             <img
               src={cat.img}
               alt={cat.label}
+              loading="lazy" // ✅ lazy load category images
               className="w-full h-48 object-cover transition-transform duration-300 group-hover:scale-110"
             />
             <div
               className={`
-          absolute bottom-0 left-0 w-full 
-          bg-white/40 backdrop-blur-md text-black py-2 text-center 
-          opacity-100 md:opacity-0 md:group-hover:opacity-100 
-          transition-all duration-300
-        `}
+                absolute bottom-0 left-0 w-full 
+                bg-white/40 backdrop-blur-md text-black py-2 text-center 
+                opacity-100 md:opacity-0 md:group-hover:opacity-100 
+                transition-all duration-300
+              `}
             >
               <span className="font-semibold">{cat.label}</span>
             </div>
@@ -142,9 +143,8 @@ const ProductSection = () => {
         ))}
       </div>
 
-
       {/* Featured Products Grid */}
-      {/* <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
         {loading
           ? Array.from(new Array(3)).map((_, index) => (
             <Box key={index} className="rounded-lg overflow-hidden shadow-md p-4">
@@ -155,9 +155,18 @@ const ProductSection = () => {
             </Box>
           ))
           : products.slice(0, 3).map((product) => (
-            <ProductCard key={product._id} product={product} />
+            <ProductCard
+              key={product._id}
+              product={{
+                ...product,
+                // ✅ Optimize Sanity image
+                image: product.image
+                  ? getImageUrl(product.image, { width: 500, quality: 75 })
+                  : product.image,
+              }}
+            />
           ))}
-      </div> */}
+      </div>
     </section>
   );
 };
