@@ -21,7 +21,7 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const mailtoLink = `mailto:neerajkumarsharma013@gmail.com?subject=${encodeURIComponent(
+    const mailtoLink = `mailto:info@mirelo.co.uk?subject=${encodeURIComponent(
       formData.subject
     )}&body=${encodeURIComponent(
       `Name: ${formData.name}\nEmail: ${formData.email}\nPhone: ${formData.phone}\n\nMessage:\n${formData.message}`
