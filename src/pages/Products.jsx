@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSearchParams } from 'react-router-dom';
 import { client } from '../lib/sanity';
@@ -196,18 +197,48 @@ const Products = () => {
 
             {/* Pagination */}
             <div className="flex justify-center items-center mt-10 flex-wrap gap-2">
-              {[...Array(totalPages)].map((_, i) => (
-                <button
-                  key={i + 1}
-                  onClick={() => handlePageChange(i + 1)}
-                  className={`px-4 py-2 rounded-lg border text-sm sm:text-base transition-colors ${currentPage === i + 1
-                    ? 'bg-gray-700 text-white border-gray-700'
-                    : 'bg-white text-gray-700 border-gray-300 hover:bg-gray-100'
-                    }`}
-                >
-                  {i + 1}
-                </button>
-              ))}
+              {/* Previous Arrow */}
+              <button
+                onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+                disabled={currentPage === 1}
+                className={`px-3 py-2 rounded-lg border text-sm sm:text-base transition-colors flex items-center justify-center ${currentPage === 1
+                    ? "bg-gray-200 text-gray-400 border-gray-200 cursor-not-allowed"
+                    : "bg-gray-700 text-white border-gray-700 hover:bg-gray-800"
+                  }`}
+              >
+                <ArrowBackIos fontSize="small" />
+              </button>
+
+              {/* Page Numbers */}
+              {[...Array(totalPages)].map((_, i) => {
+                if (i + 1 >= currentPage - 2 && i + 1 <= currentPage + 2) {
+                  return (
+                    <button
+                      key={i + 1}
+                      onClick={() => handlePageChange(i + 1)}
+                      className={`px-4 py-2 rounded-lg border text-sm sm:text-base transition-colors ${currentPage === i + 1
+                          ? "bg-gray-700 text-white border-gray-700"
+                          : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                        }`}
+                    >
+                      {i + 1}
+                    </button>
+                  );
+                }
+                return null;
+              })}
+
+              {/* Next Arrow */}
+              <button
+                onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
+                disabled={currentPage === totalPages}
+                className={`px-3 py-2 rounded-lg border text-sm sm:text-base transition-colors flex items-center justify-center ${currentPage === totalPages
+                    ? "bg-gray-200 text-gray-400 border-gray-200 cursor-not-allowed"
+                    : "bg-gray-700 text-white border-gray-700 hover:bg-gray-800"
+                  }`}
+              >
+                <ArrowForwardIos fontSize="small" />
+              </button>
             </div>
           </>
         ) : (

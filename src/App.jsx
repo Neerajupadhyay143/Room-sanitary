@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import TermsAndCondition from './pages/TermsAndCondition.jsx';
+import PrivacyPolicy from './pages/PrivacyPolicy.jsx';
+import ScrollToTop from './components/ScrollToTop.jsx';
 
 // 👇 Lazy load your page components
 const Home = lazy(() => import('./pages/Home'));
@@ -26,6 +28,7 @@ function App() {
     <Router>
       <div className="min-h-screen flex flex-col">
         <Navbar />
+        <ScrollToTop />
         <main className="flex-grow">
           <Suspense fallback={<Loader />}>
             <Routes>
@@ -47,10 +50,10 @@ function App() {
                 }
               />
               <Route
-                path="/privacy"
+                path="/privacyPolicy"
                 element={
                   <div className="min-h-screen bg-gray-50 flex items-center justify-center px-4">
-                    <h1 className="text-xl sm:text-2xl text-center">Privacy Policy - Coming Soon</h1>
+                    <PrivacyPolicy />
                   </div>
                 }
               />

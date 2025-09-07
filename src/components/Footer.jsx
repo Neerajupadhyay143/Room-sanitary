@@ -113,7 +113,7 @@ const Footer = () => {
           <ul className="space-y-3 text-sm text-gray-300">
             <li>
               <a
-                href="https://www.facebook.com"
+                href="https://www.facebook.com/mirelobathrooms/"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="flex items-center space-x-2 hover:text-blue-500 transition-colors"
@@ -213,7 +213,7 @@ const Footer = () => {
           <h3 className="font-semibold mb-4 text-white">Useful Links</h3>
           <ul className="space-y-3 text-sm text-gray-300">
             {/* <li><Link to="/blogs">Blog</Link></li> */}
-            <li><Link to="/privacyp">Privacy Policy</Link></li>
+            <li><Link to="/privacyPolicy">Privacy Policy</Link></li>
             <li><Link to="/terms">Terms & Conditions</Link></li>
           </ul>
           {/* Company Links */}
@@ -234,7 +234,7 @@ const Footer = () => {
         <div>
           <h3 className="font-semibold mb-4 text-white">Talk To Us</h3>
           <ul className="space-y-3 text-sm text-gray-300 ">
-            <li><Link to="/feedback">Feedback</Link></li>
+            {/* <li><Link to="/feedback">Feedback</Link></li> */}
             <li><Link to="/contact">Contact Us</Link></li>
             <li className="flex items-center space-x-2 ">
               <Phone className=" h-4 w-4 font-bold" /><span >+44 7393 282490
