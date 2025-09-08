@@ -32,7 +32,7 @@ const FAQSection = () => {
     };
 
     return (
-        <section className="py-1 px-4 bg-white">
+        <section className="py-1 px-4 bg-white mb-3">
             <div className="max-w-4xl mx-auto">
                 <h2 className="text-3xl sm:text-4xl font-bold text-center mb-4">
                     Frequently Asked Questions
@@ -45,9 +45,7 @@ const FAQSection = () => {
                     {faqs.map((faq, index) => (
                         <div
                             key={index}
-                            className="bg-gray-100 rounded shadow"
-
-                        >
+                            className="bg-gray-100 rounded shadow" >
                             <button
                                 onClick={() => toggle(index)}
                                 className="w-full text-left px-6 py-4 flex justify-between items-center focus:outline-none"

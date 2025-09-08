@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
+import { Slider } from "@mui/material";
 import { ArrowBackIos, ArrowForwardIos } from "@mui/icons-material";
 import { motion, AnimatePresence } from 'framer-motion';
 import { useSearchParams } from 'react-router-dom';
 import { client } from '../lib/sanity';
+import { Drawer, IconButton } from "@mui/material";
+import { Filter } from "lucide-react";
 import ProductCard from '../components/ProductCard';
 import { Search } from 'lucide-react';
 import { Skeleton, Box } from '@mui/material';
 import s from "../assets/Products/s.jpg"
 import s2 from "../assets/Products/s2.jpg"
 import s3 from "../assets/Products/s3.jpeg"
+
 
 const Products = () => {
   const [products, setProducts] = useState([]);
@@ -17,6 +21,10 @@ const Products = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedCategory, setSelectedCategory] = useState('all');
   const [searchParams] = useSearchParams();
+  const [minPrice, setMinPrice] = useState('');
+  const [maxPrice, setMaxPrice] = useState('');
+  const [priceRange, setPriceRange] = useState([0, 2000]);
+  const [filterOpen, setFilterOpen] = useState(false);
 
   // Pagination state
   const [currentPage, setCurrentPage] = useState(1);
@@ -122,6 +130,42 @@ const Products = () => {
     setCurrentPage(pageNumber);
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
+  const applyPriceFilter = () => {
+    let filtered = products;
+
+    // Category filter
+    if (selectedCategory !== "all") {
+      filtered = filtered.filter((product) =>
+        product.category?.toLowerCase() === selectedCategory
+      );
+    }
+
+    // Search filter
+    if (searchQuery) {
+      const searchLower = searchQuery.toLowerCase();
+      filtered = filtered.filter(
+        (product) =>
+          product.name?.toLowerCase().includes(searchLower) ||
+          product.title?.toLowerCase().includes(searchLower) ||
+          product.shortDescription?.toLowerCase().includes(searchLower) ||
+          product.description?.toLowerCase().includes(searchLower)
+      );
+    }
+
+    // ✅ Price filter (slider based)
+    filtered = filtered.filter((product) => {
+      const price =
+        product.price ||
+        product.pricing?.unitPrice ||
+        product.variants?.[0]?.price ||
+        0;
+
+      return price >= priceRange[0] && price <= priceRange[1];
+    });
+
+    setFilteredProducts(filtered);
+    setCurrentPage(1);
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -135,120 +179,279 @@ const Products = () => {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
-        {/* Filters */}
-        <div className="mb-8 space-y-4 lg:space-y-0 lg:flex lg:items-center lg:justify-between">
-          <div className="flex flex-wrap gap-2">
+      <div className="max-w-[1900px] mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+          {/* Sidebar (Categories + Price Filter) */}
+          <div className=" hidden lg:block lg:col-span-1 space-y-6  sticky top-20 self-start h-fit">
+            {/* Categories */}
+            <div className="bg-white  p-4 rounded-lg shadow">
+              <h2 className="font-semibold mb-3 text-lg">Categories</h2>
+              <div className="flex flex-col gap-2">
+                {categories.map((category) => (
+                  <button
+                    key={category}
+                    onClick={() => setSelectedCategory(category)}
+                    className={`px-3 py-2 text-left rounded-md font-medium transition-colors text-sm ${selectedCategory === category
+                      ? 'bg-gray-700 text-white'
+                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                      }`}
+                  >
+                    {category.charAt(0).toUpperCase() + category.slice(1)}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Price Filter */}
+            <div className="bg-white p-4 rounded-lg shadow">
+              <h2 className="font-semibold mb-3 text-lg">Price Range</h2>
+
+              <div className="px-2 py-4">
+                <Slider
+                  value={priceRange}
+                  onChange={(e, newValue) => setPriceRange(newValue)}
+                  valueLabelDisplay="auto"
+                  min={0}
+                  max={5000}
+                  step={50}
+                  sx={{ color: "#374151" }}
+                />
+                <div className="flex justify-between text-sm text-gray-600 mt-2">
+                  <span>£{priceRange[0]}</span>
+                  <span>£{priceRange[1]}</span>
+                </div>
+              </div>
+
+              <div className='flex flex-col space-y-4'>
+                <button
+                  onClick={() => {
+                    applyPriceFilter();
+                  }}
+                  className="mt-3 w-full bg-gray-700 text-white py-2 rounded-md hover:bg-gray-800"
+                >
+                  GO
+                </button>
+                <button
+                  onClick={() => {
+                    setSelectedCategory('all');
+                    setPriceRange([0, 5000]); // default range
+                    applyPriceFilter(); // reset applied filter
+                  }}
+                  className=" bg-gray-500 text-white py-2 rounded-md hover:bg-gray-800"
+                >
+                  Reset
+                </button>
+              </div>
+            </div>
+
+          </div>
+
+          {/* Product Grid */}
+          <div className="lg:col-span-4">
+            {/* Search Bar */}
+            <div className="sticky top-0 z-20  pb-4">
+              <div className="flex flex-row items-center justify-between space-x-4">
+                {/* Search Input */}
+                <div className="relative flex-1 max-w-full md:max-w-full lg:max-w-xs">
+                  <input
+                    type="text"
+                    placeholder="Search products..."
+                    value={searchQuery}
+                    onChange={(e) => setSearchQuery(e.target.value)}
+                    className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg 
+                   focus:ring-2 focus:ring-blue-500 focus:border-transparent 
+                   text-sm sm:text-base"
+                  />
+                  <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
+                </div>
+
+                {/* Mobile Filter Button */}
+                <div className="flex-shrink-0 lg:hidden">
+                  <IconButton onClick={() => setFilterOpen(true)}>
+                    <Filter className="h-6 w-6 text-gray-700" />
+                  </IconButton>
+                </div>
+              </div>
+            </div>
+
+
+            {/* Products */}
+            {loading ? (
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-6">
+                {[...Array(6)].map((_, i) => (
+                  <Box key={i} className="rounded-lg shadow-sm p-4 bg-white">
+                    <Skeleton variant="rectangular" height={350} className="mb-4 rounded" />
+                    <Skeleton width="80%" className="mb-2" />
+                    <Skeleton width="60%" />
+                  </Box>
+                ))}
+              </div>
+            ) : currentProducts.length > 0 ? (
+              <>
+                <AnimatePresence>
+                  <motion.div
+                    layout
+                    className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 mt-6"
+                  >
+                    {currentProducts.map((product) => (
+                      <motion.div
+                        key={product._id}
+                        layout
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -30 }}
+                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                      >
+                        <ProductCard product={product} />
+                      </motion.div>
+                    ))}
+                  </motion.div>
+                </AnimatePresence>
+
+                {/* Pagination */}
+                <div className="flex justify-center items-center mt-10 flex-wrap gap-2">
+                  {/* Previous Arrow */}
+                  <button
+                    onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                    className={`px-3 py-2 rounded-lg border text-sm sm:text-base transition-colors flex items-center justify-center ${currentPage === 1
+                      ? "bg-gray-200 text-gray-400 border-gray-200 cursor-not-allowed"
+                      : "bg-gray-700 text-white border-gray-700 hover:bg-gray-800"
+                      }`}
+                  >
+                    <ArrowBackIos fontSize="small" />
+                  </button>
+
+                  {/* Page Numbers */}
+                  {[...Array(totalPages)].map((_, i) => {
+                    if (i + 1 >= currentPage - 2 && i + 1 <= currentPage + 2) {
+                      return (
+                        <button
+                          key={i + 1}
+                          onClick={() => handlePageChange(i + 1)}
+                          className={`px-4 py-2 rounded-lg border text-sm sm:text-base transition-colors ${currentPage === i + 1
+                            ? "bg-gray-700 text-white border-gray-700"
+                            : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
+                            }`}
+                        >
+                          {i + 1}
+                        </button>
+                      );
+                    }
+                    return null;
+                  })}
+
+                  {/* Next Arrow */}
+                  <button
+                    onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                    className={`px-3 py-2 rounded-lg border text-sm sm:text-base transition-colors flex items-center justify-center ${currentPage === totalPages
+                      ? "bg-gray-200 text-gray-400 border-gray-200 cursor-not-allowed"
+                      : "bg-gray-700 text-white border-gray-700 hover:bg-gray-800"
+                      }`}
+                  >
+                    <ArrowForwardIos fontSize="small" />
+                  </button>
+                </div>
+              </>
+            ) : (
+              <div className="text-center py-12">
+                <p className="text-lg sm:text-xl text-gray-600">
+                  No products found matching your criteria.
+                </p>
+              </div>
+            )}
+          </div>
+
+
+        </div>
+      </div>
+      <Drawer
+        anchor="left"
+        open={filterOpen}
+        onClose={() => setFilterOpen(false)}
+        PaperProps={{
+          sx: {
+            width: "80%", // drawer width
+            maxWidth: 320,
+            padding: "16px",
+          },
+        }}
+      >
+        <h2 className="font-semibold text-lg mb-4">Filters</h2>
+
+        {/* Categories */}
+        <div className="mb-6">
+          <h3 className="font-medium mb-2">Categories</h3>
+          <div className="flex flex-col gap-2">
             {categories.map((category) => (
               <button
                 key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-3 py-2 sm:px-4 rounded-lg font-medium transition-colors text-sm sm:text-base ${selectedCategory === category
-                  ? 'bg-gray-700 text-white'
-                  : 'bg-white text-gray-700 hover:bg-gray-100'
+                onClick={() => {
+                  setSelectedCategory(category);
+                  setFilterOpen(false);
+                }}
+                className={`px-3 py-2 text-left rounded-md font-medium transition-colors text-sm ${selectedCategory === category
+                  ? "bg-gray-700 text-white"
+                  : "bg-gray-100 text-gray-700 hover:bg-gray-200"
                   }`}
               >
                 {category.charAt(0).toUpperCase() + category.slice(1)}
               </button>
             ))}
           </div>
-
-          <div className="relative max-w-xs w-full lg:w-auto">
-            <input
-              type="text"
-              placeholder="Search products..."
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent text-sm sm:text-base"
-            />
-            <Search className="absolute left-3 top-2.5 h-5 w-5 text-gray-400" />
-          </div>
         </div>
 
-        {/* Products */}
-        {loading ? (
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            {[...Array(6)].map((_, i) => (
-              <Box key={i} className="rounded-lg shadow-sm p-4 bg-white">
-                <Skeleton variant="rectangular" height={350} className="mb-4 rounded" />
-                <Skeleton width="80%" className="mb-2" />
-                <Skeleton width="60%" />
-              </Box>
-            ))}
-          </div>
-        ) : currentProducts.length > 0 ? (
-          <>
-            <AnimatePresence>
-              <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                {currentProducts.map((product) => (
-                  <motion.div
-                    key={product._id}
-                    layout
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: -30 }}
-                    transition={{ duration: 0.3, ease: "easeInOut" }}
-                  >
-                    <ProductCard product={product} />
-                  </motion.div>
-                ))}
-              </motion.div>
-            </AnimatePresence>
+        {/* Price Filter */}
+        <div className="bg-white p-4 rounded-lg shadow">
+          <h2 className="font-semibold mb-3 text-lg">Price Range</h2>
 
-            {/* Pagination */}
-            <div className="flex justify-center items-center mt-10 flex-wrap gap-2">
-              {/* Previous Arrow */}
-              <button
-                onClick={() => currentPage > 1 && handlePageChange(currentPage - 1)}
-                disabled={currentPage === 1}
-                className={`px-3 py-2 rounded-lg border text-sm sm:text-base transition-colors flex items-center justify-center ${currentPage === 1
-                    ? "bg-gray-200 text-gray-400 border-gray-200 cursor-not-allowed"
-                    : "bg-gray-700 text-white border-gray-700 hover:bg-gray-800"
-                  }`}
-              >
-                <ArrowBackIos fontSize="small" />
-              </button>
-
-              {/* Page Numbers */}
-              {[...Array(totalPages)].map((_, i) => {
-                if (i + 1 >= currentPage - 2 && i + 1 <= currentPage + 2) {
-                  return (
-                    <button
-                      key={i + 1}
-                      onClick={() => handlePageChange(i + 1)}
-                      className={`px-4 py-2 rounded-lg border text-sm sm:text-base transition-colors ${currentPage === i + 1
-                          ? "bg-gray-700 text-white border-gray-700"
-                          : "bg-white text-gray-700 border-gray-300 hover:bg-gray-100"
-                        }`}
-                    >
-                      {i + 1}
-                    </button>
-                  );
-                }
-                return null;
-              })}
-
-              {/* Next Arrow */}
-              <button
-                onClick={() => currentPage < totalPages && handlePageChange(currentPage + 1)}
-                disabled={currentPage === totalPages}
-                className={`px-3 py-2 rounded-lg border text-sm sm:text-base transition-colors flex items-center justify-center ${currentPage === totalPages
-                    ? "bg-gray-200 text-gray-400 border-gray-200 cursor-not-allowed"
-                    : "bg-gray-700 text-white border-gray-700 hover:bg-gray-800"
-                  }`}
-              >
-                <ArrowForwardIos fontSize="small" />
-              </button>
+          <div className="px-2 py-4">
+            <Slider
+              value={priceRange}
+              onChange={(e, newValue) => setPriceRange(newValue)}
+              valueLabelDisplay="auto"
+              min={0}
+              max={5000}
+              step={50}
+              sx={{ color: "#374151" }}
+            />
+            <div className="flex justify-between text-sm text-gray-600 mt-2">
+              <span>£{priceRange[0]}</span>
+              <span>£{priceRange[1]}</span>
             </div>
-          </>
-        ) : (
-          <div className="text-center py-12">
-            <p className="text-lg sm:text-xl text-gray-600">No products found matching your criteria.</p>
           </div>
-        )}
-      </div>
-    </div>
+
+          <div className='flex flex-col space-y-4'>
+            <button
+              onClick={() => {
+                applyPriceFilter();
+                setFilterOpen(false);
+              }}
+              className="mt-3 w-full bg-gray-700 text-white py-2 rounded-md hover:bg-gray-800"
+            >
+              GO
+            </button>
+            <button
+              onClick={() => {
+                setSelectedCategory('all');
+                setPriceRange([0, 5000]); // default range
+                applyPriceFilter(); // reset applied filter
+                setFilterOpen(false);
+              }}
+              className=" bg-gray-500 text-white py-2 rounded-md hover:bg-gray-800"
+            >
+              Reset
+            </button>
+          </div>
+
+        </div>
+      </Drawer>
+
+    </div >
   );
 };
 
 export default Products;
+
+
